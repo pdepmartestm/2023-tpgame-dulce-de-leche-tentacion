@@ -1,4 +1,5 @@
 import _utils.*
+import wollok.game.*
 
 // Creating our own wrapper for the fns: game.schedule, game.onTick and so
 // Reasons is: we want to have only one game.onTick for animations, movement and anything that needs to be renderer in 60 frames (a game loop ultimately)
