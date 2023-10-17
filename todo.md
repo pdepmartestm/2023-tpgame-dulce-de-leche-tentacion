@@ -43,3 +43,4 @@ This is just a simple game
 This are things that will be implemented if we had time or in later versions
 
 -   [ ] Assets
+-   [ ] Refactor using a general gamrobject API
