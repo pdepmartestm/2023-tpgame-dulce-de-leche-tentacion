@@ -1,11 +1,10 @@
 import gameLoop.*
 
 // Bullets
-class Bullet {
+Bullet {
     var property position = game.center()
-    const speed = 6
+    const speed
     const id
-    method image() = "bullet.png"
 
     method init() {
         game.addVisual(self)
@@ -21,17 +20,41 @@ class Bullet {
     }
 }
 
+class FastBullet inherits Bullet{
+    const speed = 10
+    var property image = "bullet.png"
+    var property weight = 5
+}
+
+class HeavyBullet inherits Bullet{
+    const speed = 3
+    var property image = "heavy-bullet.png"
+    var property weight = 10
+}
+
+object FastWeapon{
+    var property bullet = FastBullet
+    var property bulletsLeft = 20
+}
+
+object HeavyWeapon{
+    var property bullet = HeavyBullet
+    var property bulletsLeft = 10
+}
+
 // Objects
 object player {
-    const speed = 5
-    var property bulletsLeft = 10
+    var property weapon = FastWeapon
+    var property bulletsLeft = weapon.bulletsLeft()
+    var property bulletType = weapon.bullet()
+    var speed = 30/ bulletType.weight()
+
     var isMovingUp = false
     var property health = 100
     var bulletNumber = 0
     
     var property position = game.at(0, 400)
     method image() = "player.png"
-
     
     method init() {
         game.addVisual(self)
@@ -63,15 +86,17 @@ object player {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
+        keyboard.o().onPressDo({weapon(FastWeapon)})
+        keyboard.p().onPressDo({weapon(HeavyWeapon)})
     }
 
     method shoot() {
         if(bulletsLeft > 0) {
-            const bullet = new Bullet(position = position, id = bulletNumber)
+            const bullet = new FastBullet(position = position, id = bulletNumber)
             bulletNumber += 1
             bullet.init()
             playerBulletsUI.bullets(bulletsLeft)
-            bulletsLeft -= 1
+            weapon.bulletsLeft(bulletsLeft -1)
         }
     }
 
