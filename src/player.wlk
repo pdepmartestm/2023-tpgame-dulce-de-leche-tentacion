@@ -1,9 +1,9 @@
 import gameLoop.*
 
 // Bullets
-Bullet {
+class Bullet {
     var property position = game.center()
-    const speed
+    var speed = 5
     const id
 
     method init() {
@@ -21,25 +21,25 @@ Bullet {
 }
 
 class FastBullet inherits Bullet{
-    const speed = 10
     var property image = "bullet.png"
     var property weight = 5
 }
 
 class HeavyBullet inherits Bullet{
-    const speed = 3
     var property image = "heavy-bullet.png"
     var property weight = 10
 }
 
 object FastWeapon{
-    var property bullet = FastBullet
+    var property bullet = "Fast"
     var property bulletsLeft = 20
+    var property weight = 5
 }
 
 object HeavyWeapon{
-    var property bullet = HeavyBullet
+    var property bullet = "Heavy"
     var property bulletsLeft = 10
+    var property weight = 10
 }
 
 // Objects
@@ -47,7 +47,7 @@ object player {
     var property weapon = FastWeapon
     var property bulletsLeft = weapon.bulletsLeft()
     var property bulletType = weapon.bullet()
-    var speed = 30/ bulletType.weight()
+    var speed = 30/ weapon.weight()
 
     var isMovingUp = false
     var property health = 100
@@ -86,17 +86,29 @@ object player {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
-        keyboard.o().onPressDo({weapon(FastWeapon)})
-        keyboard.p().onPressDo({weapon(HeavyWeapon)})
+        /* keyboard.o().onPressDo({weapon(FastWeapon)})
+        keyboard.p().onPressDo({weapon(HeavyWeapon)}) */
     }
 
     method shoot() {
         if(bulletsLeft > 0) {
-            const bullet = new FastBullet(position = position, id = bulletNumber)
-            bulletNumber += 1
-            bullet.init()
-            playerBulletsUI.bullets(bulletsLeft)
-            weapon.bulletsLeft(bulletsLeft -1)
+            if(bulletType == "Fast"){
+                const bullet = new FastBullet(position = position, id = bulletNumber)
+                bulletNumber += 1
+                bullet.init()
+                playerBulletsUI.bullets(bulletsLeft)
+                weapon.bulletsLeft(bulletsLeft -1)
+            }
+            if(bulletType == "Heavy"){
+                const bullet = new HeavyBullet(position = position, id = bulletNumber)
+                bulletNumber += 1
+                bullet.init()
+                playerBulletsUI.bullets(bulletsLeft)
+                weapon.bulletsLeft(bulletsLeft -1)
+            }
+            else{
+                throw new Exception(message = "No hay arma que encuadre")
+            }
         }
     }
 
