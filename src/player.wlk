@@ -3,7 +3,9 @@ import gameLoop.*
 // Bullets
 class Bullet {
     var property position = game.center()
-    var speed = 5
+    const speed = 6
+    const property weight = 8
+    const property image = "bullet.png"
     const id
 
     method init() {
@@ -20,14 +22,10 @@ class Bullet {
     }
 }
 
-class FastBullet inherits Bullet{
-    var property image = "bullet.png"
-    var property weight = 5
+class FastBullet inherits Bullet(speed = 9,weight = 5, image = "bullet.png"){
 }
 
-class HeavyBullet inherits Bullet{
-    var property image = "heavy-bullet.png"
-    var property weight = 10
+class HeavyBullet inherits Bullet(speed = 3,weight = 10, image = "heavy-bullet.png"){
 }
 
 object FastWeapon{
@@ -86,8 +84,8 @@ object player {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
-        /* keyboard.o().onPressDo({weapon(FastWeapon)})
-        keyboard.p().onPressDo({weapon(HeavyWeapon)}) */
+        keyboard.o().onPressDo({weapon(FastWeapon)})
+        keyboard.p().onPressDo({weapon(HeavyWeapon)})
     }
 
     method shoot() {
