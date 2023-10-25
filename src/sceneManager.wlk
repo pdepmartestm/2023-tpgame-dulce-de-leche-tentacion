@@ -1,24 +1,32 @@
+import enemies.index.*
+import gameLoop.*
+
 class Scene {
     method load() {
         self.loadVisuals()
         self.setupControls()
     }
 
-    method loadVisuals() {
+    method loadVisuals() {}
 
-    }
-
-    method remove {
+    /* method remove() {
         //Removes all visuals
-    }
+    } */
 
-    method setupControls {
+    method setupControls() {}
+}
 
+object menu inherits Scene {
+    override method loadVisuals() {
+        game.boardGround("menu.png")
+        keyboard.space().onPressDo({sceneManager.load(main)})
     }
 }
 
 object main inherits Scene {
     override method loadVisuals() {
+        game.boardGround("background.png")
+        gameLoop.start()
         player.init()
         waveManager.init()
     }
@@ -31,31 +39,12 @@ object howToPlay inherits Scene {
     }
 }
 
-object menu inherits Scene {
-    override method loadVisuals() {
-        player.init()
-        waveManager.init()
-    }
-}
-
 object sceneManager {
-    var currentScene = main
+    var currentScene = menu
 
     method load(scene) {
-        currentScene.remove()
+        //currentScene.remove() después lo ponemos, ahora esto jode
         currentScene = scene
         currentScene.load()
-    }
-
-    method main() {
-        self.load(main)
-    }
-
-    method menu() {
-        self.load(menu)
-    }
-
-    method howToPlay() {
-        self.load(howToPlay)
     }
 }
