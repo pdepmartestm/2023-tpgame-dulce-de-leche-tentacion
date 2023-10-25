@@ -21,6 +21,7 @@ object menu inherits Scene {
     override method loadVisuals() {
         game.boardGround("menu.png")
         keyboard.space().onPressDo({sceneManager.load(main)})
+        // hacer que al apretar la tecla H o ESC, te mande al How To Play
     }
 }
 
@@ -35,8 +36,7 @@ object main inherits Scene {
 
 object howToPlay inherits Scene {
     override method loadVisuals() {
-        player.init()
-        waveManager.init()
+        // poner el howToPlay, explicado en objeto menú
     }
 }
 
