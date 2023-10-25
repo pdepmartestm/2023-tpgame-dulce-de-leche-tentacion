@@ -1,5 +1,6 @@
 import enemies.index.*
 import gameLoop.*
+import player.*
 
 class Scene {
     method load() {
