@@ -22,13 +22,13 @@ class Bullet {
     }
 }
 
-class FastBullet inherits Bullet (speed = 9,weight = 5, image = "bullet.png"){
+class FastBullet inherits Bullet(speed = 9, weight = 5, image = "bullet.png"){
 }
 
-class HeavyBullet inherits Bullet (speed = 3,weight = 10, image = "heavy-bullet.png"){
+class HeavyBullet inherits Bullet(speed = 3, weight = 10, image = "heavy-bullet.png"){
 }
 
-object fastWeapon {
+object fastWeapon{
     var property bulletsLeft = 20
     var property weight = 5
 
@@ -51,7 +51,6 @@ object player {
     var property weapon = fastWeapon
     const speed = 30 / weapon.weight()
 
-    var isFastWeapon = true // used for generateBullets, view another way of doing this
     var isMovingUp = false
     var property health = 100
     var bulletNumber = 0
@@ -90,28 +89,27 @@ object player {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
-        keyboard.o().onPressDo({weapon = fastWeapon}, {isFastWeapon = true})
-        keyboard.p().onPressDo({weapon = heavyWeapon}, {isFastWeapon = false})
+        keyboard.o().onPressDo({weapon = fastWeapon})
+        keyboard.p().onPressDo({weapon = heavyWeapon})
     }
 
-    method generateBullets() {
-        if (isFastWeapon){
-                const bullet = new FastBullet(position = position, id = bulletNumber)
-                bulletNumber += 1
-                bullet.init()
-                weapon.shoot()
-            }
+    method generateBullets (){
+        if(weapon == fastWeapon){
+            const bullet = new FastBullet(position = position, id = bulletNumber)
+            bulletNumber += 1
+            bullet.init()
+        }
         else {
-                const bullet = new HeavyBullet(position = position, id = bulletNumber)
-                bulletNumber += 1
-                bullet.init()
-                weapon.shoot()
-            }
+            const bullet = new HeavyBullet(position = position, id = bulletNumber)
+            bulletNumber += 1
+            bullet.init()
+        }
     }
 
     method shoot() {
         if(weapon.bulletsLeft() > 0) {
             self.generateBullets()
+            weapon.shoot()
             }
         }
 
@@ -123,7 +121,7 @@ object player {
 
 
 // ============== UI ================
-class UI {
+class UI{
     const weapon
     const property position
 
