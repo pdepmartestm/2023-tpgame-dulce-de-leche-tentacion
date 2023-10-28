@@ -3,8 +3,8 @@ import main.gameManager
 import player.*
 import _scheduler.*
 
-class Melee inherits Enemy(image = "melee.png") { 
-    const speed = 2
+class Melee inherits Enemy(speed = 2, health = 50, image = "melee.png") { 
+    const damage = 50
     var shouldAttack = true 
     var shouldMoveOnY = true
     var moveOnY = speed
@@ -15,6 +15,7 @@ class Melee inherits Enemy(image = "melee.png") {
             scheduler.schedule(1000, {position = position.right(50)})
             shouldAttack = false
             scheduler.schedule(5000, {shouldAttack = true})
+            game.onCollideDo(self, {visual => visual.getDamaged(damage)})
         }
     }
 

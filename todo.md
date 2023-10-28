@@ -10,7 +10,7 @@ This is just a simple game
 -   [x] Shooting
 -   [ ] Attack (increase damage as wave increases)
 -   [ ] Health
--   [ ] Guns: pistol, shotgun, rifle, grenade
+-   [ ] Guns: pistol, shotgun, rifle, ~~grenade~~. Change the gun based on the wave.
 -   [ ] Buffer Items: aid kid, more damage
 -   [ ] Nerf Items: slower speed, less damage
 -   [ ] UI: health, bullets left, reloading

@@ -3,30 +3,23 @@ import gameLoop.*
 import player.*
 
 class Scene {
-    method load() {
-        self.loadVisuals()
-        self.setupControls()
+    method load()
+
+    method remove() {
+        game.allVisuals().forEach({visual => game.removeVisual(visual)})
     }
-
-    method loadVisuals() {}
-
-    /* method remove() {
-        //Removes all visuals
-    } */
-
-    method setupControls() {}
 }
 
 object menu inherits Scene {
-    override method loadVisuals() {
+    override method load() {
         game.boardGround("menu.png")
-        keyboard.space().onPressDo({sceneManager.load(main)})
-        // hacer que al apretar la tecla H o ESC, te mande al How To Play
+        keyboard.enter().onPressDo({sceneManager.load(main)})
+        keyboard.h().onPressDo({sceneManager.load(howToPlay)})
     }
 }
 
 object main inherits Scene {
-    override method loadVisuals() {
+    override method load() {
         game.boardGround("background.png")
         gameLoop.start()
         player.init()
@@ -35,8 +28,15 @@ object main inherits Scene {
 }
 
 object howToPlay inherits Scene {
-    override method loadVisuals() {
+    override method load() {
         // poner el howToPlay, explicado en objeto menú
+    }
+
+}
+
+object gameOver inherits Scene {
+    override method load() {
+        
     }
 }
 
@@ -44,8 +44,8 @@ object sceneManager {
     var currentScene = menu
 
     method load(scene) {
-        //currentScene.remove() después lo ponemos, ahora esto jode
+        currentScene.remove()
+        scene.load()
         currentScene = scene
-        currentScene.load()
     }
 }

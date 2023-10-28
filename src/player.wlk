@@ -1,67 +1,62 @@
 import gameLoop.*
+import sceneManager.*
+import _scheduler.*
+import _utils.*
+import constants.*
+import bullet.*
+import ui.*
 
-// Bullets
-class Bullet {
-    var property position = game.center()
-    const speed = 6
-    const property weight = 8
-    const property image = "bullet.png"
-    const id
+class Gun {
+    const property name
+    const property weight
+    var property bulletsLeft
+    const delayBetweenShots
+    var shouldShoot = true
 
-    method init() {
-        game.addVisual(self)
-        gameLoop.add("player_bullet_move" + id, {self.move()})
-    }   
-    
-    method move() {
-        if(position.x() >= game.width() + 50) {
-            game.removeVisual(self)
-            gameLoop.remove("player_bullet_move" + id)
+    method shoot(fn) {
+        if(!shouldShoot || bulletsLeft <= 0) return null
+        else {
+            shouldShoot = false
+            scheduler.schedule(delayBetweenShots, {shouldShoot = true})
+            bulletsLeft -=  1
+            const audio = game.sound("polentaa.mp3")
+            audio.play()
+            fn.apply()
         }
-        position = position.right(speed)
     }
 }
 
-class FastBullet inherits Bullet(speed = 9, weight = 5, image = "bullet.png"){
+object shotgun inherits Gun(weight = 12, name = "shotgun", bulletsLeft = 15, delayBetweenShots = 500) {
+    override method shoot(x) {
+        super({
+            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image = "heavy-bullet.png").init()
+            new Bullet(position = player.position(), speed = 5, damage = 40, image = "heavy-bullet.png").init()
+            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image = "heavy-bullet.png").init()
+        })
+    }
 }
-
-class HeavyBullet inherits Bullet(speed = 3, weight = 10, image = "heavy-bullet.png"){
+object sniper inherits Gun(weight = 20, name = "sniper", bulletsLeft = 10, delayBetweenShots = 1000) {
+    override method shoot(x) {
+        super({new Bullet(position = player.position(), speed = 4, damage = 100, image = "heavy-bullet.png").init()})
+    }
 }
-
-object fastWeapon{
-    var property bulletsLeft = 20
-    var property weight = 5
-
-    method shoot() {
-        bulletsLeft -= 1
+object scar inherits Gun(weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
+    override method shoot(x) {
+        super({new Bullet(position = player.position(),  speed = 8, damage = 20, image = "fast-bullet.png").init()})
     }
 }
 
-object heavyWeapon{
-    var property bulletsLeft = 10
-    var property weight = 10
-
-    method shoot() {
-        bulletsLeft -= 1
-    }
-}
-
-// Objects
 object player {
-    var property weapon = fastWeapon
+    var property weapon = shotgun
     const speed = 30 / weapon.weight()
-
     var isMovingUp = false
     var property health = 100
-    var bulletNumber = 0
-    
     var property position = game.at(0, 400)
     method image() = "player.png"
     
     method init() {
         game.addVisual(self)
-        game.addVisual(new UI (weapon = heavyWeapon, position = game.at(game.width() - 100, 20)))
-        game.addVisual(new UI (weapon = fastWeapon, position = game.at(game.width() - 150, 20)))
+        new HealthBar(parent = self, yOffset = 20, xOffset = -5).init()
         self.setupControls()
         gameLoop.add("player_move", {self.move()})
     } 
@@ -77,7 +72,6 @@ object player {
                 isMovingUp = true
             position = position.down(speed)    
         }
-        
     }
 
     method getDamaged(damage) {
@@ -89,33 +83,15 @@ object player {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
-        keyboard.o().onPressDo({weapon = fastWeapon})
-        keyboard.p().onPressDo({weapon = heavyWeapon})
-    }
-
-    method generateBullets (){
-        if(weapon == fastWeapon){
-            const bullet = new FastBullet(position = position, id = bulletNumber)
-            bulletNumber += 1
-            bullet.init()
-        }
-        else {
-            const bullet = new HeavyBullet(position = position, id = bulletNumber)
-            bulletNumber += 1
-            bullet.init()
-        }
     }
 
     method shoot() {
-        if(weapon.bulletsLeft() > 0) {
-            self.generateBullets()
-            weapon.shoot()
-            }
-        }
+        weapon.shoot("")
+    }
 
     method die() {
         game.stop()
-        // game.addVisual(gameOver) //TODO make gameOver in main
+        sceneManager.load(gameOver) //TODO make gameOver in main
     }
 }
 

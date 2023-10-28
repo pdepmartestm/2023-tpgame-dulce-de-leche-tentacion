@@ -5,11 +5,11 @@ import enemies.index.waveManager
 import wollok.game.*
 
 class Enemy {
+    const speed
     const property image
     var property position = utils.getRandomPosOutOfScreenRight()
     var health = 100
-    const id
-    const damage
+    const id = utils.generateRandomId()
 
 
     method init() {
@@ -39,9 +39,9 @@ class Enemy {
     }  
 }
 
-class EnemyBullet {
+/* class EnemyBullet {
     var property position
-    const id
+    const id = utils.generateRandomId()
     const speed
     const damage
     const property image
@@ -58,5 +58,4 @@ class EnemyBullet {
             visual.getDamaged(damage)
         }})
     }
-}
-
+} */
