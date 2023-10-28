@@ -70,6 +70,7 @@ object waveManager {
         wave.onWaveFinish()
         currentWave += 1
         scheduler.schedule(3000, {self.startWave()})
+        player.weapon().bulletsLeft(player.weapon().magazine())
 
         if((currentWave % 3) == 0) {
             player.health(100)

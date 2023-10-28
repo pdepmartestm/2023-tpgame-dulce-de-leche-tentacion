@@ -3,13 +3,15 @@
 Today we want to:
 
 -   [x] Finish the different type of guns
--   [x] Finish collisions
--   [ ] Finish UI stuff (namely: health, bulletsLeft, etc)
--   [ ] See how to implement ammo reloading
+-   [x] Finish UI stuff (namely: health, bulletsLeft, etc)
 -   [x] Every 3 rounds, health resets to 100
--   [ ] Finish the different scenes
+-   [x] Finish the different scenes
+-   [ ] Finish collisions
 
 Tomorrow we'll:
 
+-   [ ] Choose character
+-   [ ] Optimization
 -   [ ] Finish with the assets, audio, animations and whatnot
+-   [ ] Make UI pretty
 -   [ ] Test everything and make sure everting works smoothly

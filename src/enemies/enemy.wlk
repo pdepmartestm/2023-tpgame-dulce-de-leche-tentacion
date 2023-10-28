@@ -8,12 +8,13 @@ class Enemy {
     const speed
     const property image
     var property position = utils.getRandomPosOutOfScreenRight()
-    var health = 100
+    var property health = 100
     const id = utils.generateRandomId()
 
 
     method init() {
         game.addVisual(self)
+        new HealthBar(parent = self, yOffset = 20, xOffset = -5).init()
         // game.addVisual(new HealthBar(parent = self, upFromPos =  20))
         gameLoop.add("enemy_move" + id, {self.move()})
     }

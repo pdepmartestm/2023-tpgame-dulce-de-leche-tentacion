@@ -1,6 +1,5 @@
 import player.*
 import gameLoop.*
-import enemies.index.*
 import wollok.game.*
 import sceneManager.*
 
