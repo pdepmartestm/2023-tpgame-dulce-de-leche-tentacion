@@ -6,7 +6,7 @@ import _scheduler.*
 import player.*
 import bullet.*
 
-class SniperBullet inherits Bullet (damage = 25, speed = 3, image = "sniper_bullet.png") {
+class SniperBullet inherits Bullet (damage = 25, speed = 3, image_name = "sniper_bullet.png") {
     var ySpeed = 5
 
     override method init() {
@@ -29,7 +29,7 @@ class SniperBullet inherits Bullet (damage = 25, speed = 3, image = "sniper_bull
     }   
 }
 
-class TurretBullet inherits Bullet (damage = 25, speed = 2, image = "turret_bullet.png"){
+class TurretBullet inherits Bullet (damage = 25, speed = 2, image_name = "turret_bullet.png"){
     override method move() {
         if(position.x() <= -20) {
             game.removeVisual(self)
@@ -51,7 +51,7 @@ class Shooter inherits Enemy {
     }
 }
 
-class Sniper inherits Shooter(image = "sniper.png", speed = 4,  moveUntil = 150) {
+class Sniper inherits Shooter(image_name = "sniper.png", speed = 4,  moveUntil = 150) {
     override method attack() {
         new SniperBullet(position = position, id = utils.generateRandomId()).init()
         scheduler.schedule(3000, {self.attack()})
@@ -59,7 +59,7 @@ class Sniper inherits Shooter(image = "sniper.png", speed = 4,  moveUntil = 150)
 }
 
 // They only shoot ahead, witouth pointing to the player
-class Turret inherits Shooter(image = "turret.png", speed = 4, moveUntil = 200) {
+class Turret inherits Shooter(image_name = "turret.png", speed = 4, moveUntil = 200) {
     override method attack() {
         new TurretBullet(position = position, id = utils.generateRandomId()).init()
         scheduler.schedule(2000, {self.attack()})

@@ -8,7 +8,8 @@ class Bullet {
     const damage
     const vxScaler = 1
     const vyScaler = 0
-    const property image
+    const image_name
+    const property image = player.selectedPlayer() + "/" + image_name
 
     method init() {
         game.addVisual(self)

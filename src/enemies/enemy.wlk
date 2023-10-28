@@ -6,7 +6,8 @@ import wollok.game.*
 
 class Enemy {
     const speed
-    const property image
+    const image_name
+    const property image = player.selectedPlayer() + "/" + image_name
     var property position = utils.getRandomPosOutOfScreenRight()
     var property health = 100
     const id = utils.generateRandomId()

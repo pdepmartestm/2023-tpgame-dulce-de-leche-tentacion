@@ -11,6 +11,8 @@ Today we want to:
 Tomorrow we'll:
 
 -   [ ] Choose character
+-   [ ] Don't forget game over screen
+-   [ ] Don't forget to add message when the wave ends
 -   [ ] Optimization
 -   [ ] Finish with the assets, audio, animations and whatnot
 -   [ ] Make UI pretty

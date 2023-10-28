@@ -29,30 +29,31 @@ class Gun {
 object shotgun inherits Gun(magazine = 10, weight = 12, name = "shotgun", bulletsLeft = 15, delayBetweenShots = 500) {
     override method shoot(x) {
         super({
-            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image = "heavy-bullet.png").init()
-            new Bullet(position = player.position(), speed = 5, damage = 40, image = "heavy-bullet.png").init()
-            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image = "heavy-bullet.png").init()
+            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
+            new Bullet(position = player.position(), speed = 5, damage = 40, image_name = "heavy-bullet.png").init()
+            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
         })
     }
 }
 object sniper inherits Gun(magazine = 10, weight = 20, name = "sniper", bulletsLeft = 10, delayBetweenShots = 1000) {
     override method shoot(x) {
-        super({new Bullet(position = player.position(), speed = 4, damage = 100, image = "heavy-bullet.png").init()})
+        super({new Bullet(position = player.position(), speed = 4, damage = 100, image_name = "heavy-bullet.png").init()})
     }
 }
 object scar inherits Gun(magazine = 10, weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
     override method shoot(x) {
-        super({new Bullet(position = player.position(),  speed = 8, damage = 20, image = "fast-bullet.png").init()})
+        super({new Bullet(position = player.position(),  speed = 8, damage = 20, image_name = "fast-bullet.png").init()})
     }
 }
 
 object player {
+    var property selectedPlayer = "massa"
     var property weapon = shotgun
     const speed = 30 / weapon.weight()
     var isMovingUp = false
     var property health = 100
     var property position = game.at(0, 400)
-    method image() = "player.png"
+    method image() = selectedPlayer  + "/player.png"
     
     method init() {
         game.addVisual(self)
@@ -93,7 +94,6 @@ object player {
     }
 
     method die() {
-        game.stop()
         sceneManager.load(gameOver) //TODO make gameOver in main
     }
 }

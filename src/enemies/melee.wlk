@@ -3,7 +3,7 @@ import main.gameManager
 import player.*
 import _scheduler.*
 
-class Melee inherits Enemy(speed = 2, health = 50, image = "melee.png") { 
+class Melee inherits Enemy(speed = 2, health = 50, image_name = "melee.png") { 
     const damage = 50
     var shouldAttack = true 
     var shouldMoveOnY = true
