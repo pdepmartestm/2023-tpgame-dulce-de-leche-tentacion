@@ -2,7 +2,7 @@ import ui.*
 import _utils.* 
 import gameLoop.*
 import enemies.index.waveManager
-import wollok.game.*
+import player.*
 
 class Enemy {
     const speed
@@ -41,23 +41,3 @@ class Enemy {
     }  
 }
 
-/* class EnemyBullet {
-    var property position
-    const id = utils.generateRandomId()
-    const speed
-    const damage
-    const property image
-
-    method init() {
-        game.addVisual(self)
-        gameLoop.add("enemy_bullet" + id, {self.move()})
-    }   
-    
-    method move() 
-
-    method collision() {
-        game.whenCollideDo(self, {visual => {
-            visual.getDamaged(damage)
-        }})
-    }
-} */

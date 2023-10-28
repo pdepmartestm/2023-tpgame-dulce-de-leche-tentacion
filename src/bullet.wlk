@@ -1,5 +1,6 @@
 import _utils.*
 import gameLoop.*
+import player.*
 
 class Bullet {
     var property position
@@ -13,14 +14,14 @@ class Bullet {
 
     method init() {
         game.addVisual(self)
-        gameLoop.add("player_bullet_move" + id, {self.move()})
+        gameLoop.add("bullet" + id, {self.move()})
         game.onCollideDo(self, {visual => visual.getDamaged(damage)})
     }   
     
     method move() {
-       if(position.x() >= game.width() + 50) {
+       if(position.x() >= game.width() + 50 || position.x() <= -20) {
             game.removeVisual(self)
-            gameLoop.remove("player_bullet_move" + id)
+            gameLoop.remove("bullet" + id)
         } 
         position = position.right(vxScaler*speed).up(vyScaler*speed)
     }
