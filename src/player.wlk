@@ -4,7 +4,7 @@ import _scheduler.*
 import _utils.*
 import constants.*
 import bullet.*
-import gameObject.*
+import gameVisual.*
 import ui.*
 
 class Gun {
@@ -45,16 +45,16 @@ object shotgun inherits Gun(magazine = 10, weight = 12, name = "shotgun", bullet
 }
 object sniper inherits Gun(magazine = 10, weight = 20, name = "sniper", bulletsLeft = 10, delayBetweenShots = 1000) {
     override method shoot(x) {
-        super({new PlayerBullet(position = player.position().right(10), speed = 4, damage = 100, image_name = "heavy-bullet.png").init()})
+        super({new PlayerBullet(position = player.position().right(10), speed = 4, damage = 100, image_name = player.selectedPlayer()+"heavy-bullet.png").init()})
     }
 }
 object scar inherits Gun(magazine = 30, weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
     override method shoot(x) {
-        super({new PlayerBullet(position = player.position().right(10),  speed = 8, damage = 20, image_name = "fast-bullet.png").init()})
+        super({new PlayerBullet(position = player.position().right(10),  speed = 8, damage = 20, image_name = player.selectedPlayer()+"fast-bullet.png").init()})
     }
 }
 
-object player inherits GameObject(name = "player") {
+object player inherits GameVisual(name = "player") {
     var property selectedPlayer = "massa"
     var property weapon = scar
     const speed = 30 / weapon.weight()
@@ -107,7 +107,7 @@ object player inherits GameObject(name = "player") {
 }
 
 
-class BulletsUI{
+class BulletsUI inherits GameVisual {
     const weapon
     const property position
     

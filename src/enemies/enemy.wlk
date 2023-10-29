@@ -2,10 +2,10 @@ import ui.*
 import _utils.* 
 import gameLoop.*
 import enemies.index.waveManager
-import gameObject.*
+import gameVisual.*
 import player.*
 
-class Enemy inherits GameObject(name = "enemy") {
+class Enemy inherits GameVisual(name = "enemy") {
     const speed
     const image_name
     const property image = player.selectedPlayer() + "/" + image_name

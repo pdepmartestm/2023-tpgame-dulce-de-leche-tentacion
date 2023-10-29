@@ -1,9 +1,9 @@
 import _utils.*
 import gameLoop.*
 import player.*
-import gameObject.*
+import gameVisual.*
 
-class Bullet inherits GameObject(name = "bullet"){
+class Bullet inherits GameVisual(name = "bullet"){
     const id = utils.generateRandomId()
     var property position
     const speed
@@ -16,7 +16,6 @@ class Bullet inherits GameObject(name = "bullet"){
     method init() {
         game.addVisual(self)
         gameLoop.add("bullet" + id, {self.move()})
-        game.whenCollideDo(self, {visual => self.onCollideDo(visual)})
     }   
     
     method move() {

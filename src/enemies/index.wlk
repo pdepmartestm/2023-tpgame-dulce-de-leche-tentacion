@@ -2,6 +2,7 @@ import shooters.*
 import melee.*
 import player.*
 import _scheduler.*
+import gameVisual.*
 
 // Wave functionality
 // The wave system will be fairly simple, basically we are gonna create 3 different types of waves, each one with its own items and stuff
@@ -86,7 +87,7 @@ object waveManager {
     }
 }
 
-object currentWaveUI {
+object currentWaveUI inherits GameVisual {
     method text() = "Wave: " + waveManager.currentWave()
     method message() = "Wave: " + waveManager.currentWave()
     method position() = game.at(game.width() - 100, game.height() - 100) 
