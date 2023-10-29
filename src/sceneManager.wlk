@@ -12,7 +12,8 @@ class Scene {
 
 object menu inherits Scene {
     override method load() {
-        game.boardGround("menu.png")
+        game.boardGround("intro.png")
+        sceneManager.himno().play()
         keyboard.h().onPressDo({sceneManager.load(howToPlay)})
         keyboard.enter().onPressDo({sceneManager.load(main)})
     }
@@ -20,7 +21,9 @@ object menu inherits Scene {
 
 object main inherits Scene {
     override method load() {
-        game.boardGround("background.png")
+        game.boardGround("background.jpg")
+        sceneManager.himno().pause()
+        game.sound(player.selectedPlayer()+"/cancion.mp3").play()
         gameLoop.start()
         player.init()
         waveManager.init()
@@ -29,31 +32,57 @@ object main inherits Scene {
 
 object howToPlay inherits Scene {
     override method load() {
-        game.boardGround("menu.png")
+        game.boardGround("how-to-play.png")
         keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }
 }
 
-object gameOver inherits Scene {
+object win inherits Scene{
     override method load() {
-        game.boardGround("menu.png")
-        keyboard.r().onPressDo({sceneManager.load(selectCharacter)})
+        game.boardGround(player.selectedPlayer()+"/win.png")
+        sceneManager.himno().play()
+        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
+    }
+}
+
+object defeat inherits Scene {
+    override method load() {
+        game.boardGround(player.selectedPlayer()+"/defeat.png")
+        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }
 }
 
 object selectCharacter inherits Scene {
+    var massa = true
     override method load() {
-        keyboard.n().onPressDo({
+        game.boardGround("seleccion-massa.png")
+        keyboard.left().onPressDo({self.changeCharacter()})
+        keyboard.right().onPressDo({self.changeCharacter()})
+        keyboard.a().onPressDo({self.run()})
+    }
+    method changeCharacter() {
+        massa = !massa
+        if(massa){
+            game.boardGround("seleccion-massa.png")
+        }
+        else{
+            game.boardGround("seleccion-milei.png")
+        }
+    }
+    method run(){
+        if(massa){
             player.selectedPlayer("massa")
-            sceneManager.load(main)})
-        keyboard.m().onPressDo({
+        }
+        else{
             player.selectedPlayer("milei")
-            sceneManager.load(main)})
+        }
+        sceneManager.load(main)
     }
 }
 
 object sceneManager {
     var currentScene = menu
+    const property himno = game.sound("himno.mp3")
 
     method load(scene) {
         currentScene.remove()

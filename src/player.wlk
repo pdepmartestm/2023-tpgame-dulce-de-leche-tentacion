@@ -41,21 +41,21 @@ object shotgun inherits Gun(magazine = 10, weight = 12, name = "shotgun", bullet
             new PlayerBullet(position = player.position().right(10), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "multiple.png").init()
             new PlayerBullet(position = player.position().right(10), speed = 5, damage = 40, image_name = "multiple.png").init()
             new PlayerBullet(position = player.position().right(10), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image_name = "multiple.png").init()
-            game.sound("multiple.mp3").play()
+            game.sound(player.selectedPlayer()+"/multiple.mp3").play()
         })
     }
 }
 object heavy inherits Gun(magazine = 10, weight = 20, name = "heavy", bulletsLeft = 10, delayBetweenShots = 1000) {
     override method shoot(x) {
         super({new PlayerBullet(position = player.position().right(10), speed = 4, damage = 100, image_name = "heavy-bullet.png").init()
-        game.sound("heavy.mp3").play()})
+        game.sound(player.selectedPlayer()+"/heavy.mp3").play()})
     }
 }
 
 object scar inherits Gun(magazine = 30, weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
     override method shoot(x) {
         super({new PlayerBullet(position = player.position().right(10),  speed = 8, damage = 20, image_name = "fast-bullet.png").init()
-        game.sound("fast.mp3").play()})
+        game.sound(player.selectedPlayer()+"/fast.mp3").play()})
     }
 }
 
