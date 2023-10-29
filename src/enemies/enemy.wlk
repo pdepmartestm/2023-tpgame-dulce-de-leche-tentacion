@@ -7,16 +7,15 @@ import player.*
 
 class Enemy inherits GameVisual(name = "enemy") {
     const speed
+    var isAlive = true
     const image_name
     const property image = player.selectedPlayer() + "/" + image_name
     var property position = utils.getRandomPosOutOfScreenRight()
     var property health = 100
-    const id = utils.generateRandomId()
 
     method init() {
         game.addVisual(self)
         new HealthBar(parent = self, yOffset = 20, xOffset = -5).init()
-        // game.addVisual(new HealthBar(parent = self, upFromPos =  20))
         gameLoop.add("enemy_move" + id, {self.move()})
     }
 
@@ -28,8 +27,8 @@ class Enemy inherits GameVisual(name = "enemy") {
 
     method attack()
 
-    method whenCollided(damage) {
-        health -= damage
+    method whenCollided(value) {
+        health -= value
         if(health <= 0) {
             self.die()
         }
@@ -38,6 +37,7 @@ class Enemy inherits GameVisual(name = "enemy") {
     method die() {
         waveManager.destroyEnemy(self)
         gameLoop.remove("enemy_move" + id)
+        isAlive = false
     }  
 }
 

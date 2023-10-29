@@ -38,9 +38,9 @@ class NormalWave inherits Wave {
 
     method spawnEnemy() {
         const rndNum = 0.randomUpTo(2).round()
-        if(rndNum == 0) new Sniper(id = enemyNumber).init()
-        else if(rndNum == 1) new Sniper(id = enemyNumber).init()
-        else if(rndNum == 2) new Sniper(id = enemyNumber).init()
+        if(rndNum == 0) new Sniper().init()
+        else if(rndNum == 1) new Sniper().init()
+        else if(rndNum == 2) new Sniper().init()
         enemyNumber += 1
         totalEnemiesLeftToSpawn -= 1
 
@@ -51,7 +51,7 @@ class NormalWave inherits Wave {
 }
 
 object waveManager {
-    var property currentWave = 1
+    var property currentWave = 2
     var wave = null
 
     method init() {
@@ -72,10 +72,7 @@ object waveManager {
         currentWave += 1
         scheduler.schedule(3000, {self.startWave()})
         player.weapon().bulletsLeft(player.weapon().magazine())
-
-        if((currentWave % 3) == 0) {
-            player.health(100)
-        }
+        player.health(100)
     }
 
     method destroyEnemy(enemy) {
@@ -87,7 +84,7 @@ object waveManager {
     }
 }
 
-object currentWaveUI inherits GameVisual {
+object currentWaveUI inherits GameVisual(name = "waveUI") {
     method text() = "Wave: " + waveManager.currentWave()
     method message() = "Wave: " + waveManager.currentWave()
     method position() = game.at(game.width() - 100, game.height() - 100) 

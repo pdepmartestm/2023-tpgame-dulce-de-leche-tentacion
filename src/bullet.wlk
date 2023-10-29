@@ -4,7 +4,6 @@ import player.*
 import gameVisual.*
 
 class Bullet inherits GameVisual(name = "bullet"){
-    const id = utils.generateRandomId()
     var property position
     const speed
     const damage

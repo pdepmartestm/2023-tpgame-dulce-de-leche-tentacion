@@ -29,7 +29,7 @@ class Gun {
 class PlayerBullet inherits Bullet {
     override method onCollideDo(visual) {
         if(visual.name() ==  "enemy") {
-            visual.whenCollided()
+            visual.whenCollided(damage)
             self.remove()
         }
     }  
@@ -91,8 +91,8 @@ object player inherits GameVisual(name = "player") {
         }
     }
 
-    override method whenCollided(damage) {
-        health -= damage
+    override method whenCollided(value) {
+        health -= value
         if(health <= 0) self.die()
     }
 
@@ -112,7 +112,7 @@ object player inherits GameVisual(name = "player") {
 }
 
 
-class BulletsUI inherits GameVisual {
+class BulletsUI inherits GameVisual(name = "bulletsUI") {
     const weapon
     const property position
     
