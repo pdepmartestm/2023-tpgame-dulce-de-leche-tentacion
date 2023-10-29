@@ -29,9 +29,5 @@ class Bullet inherits GameVisual(name = "bullet"){
         game.removeVisual(self)
         gameLoop.remove("bullet" + id)
     }
-
-    method onCollideDo(visual) {
-        self.remove()
-    }
 }
 

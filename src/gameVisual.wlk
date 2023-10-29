@@ -3,12 +3,12 @@
 class GameVisual {
     const property name = ""
 
-    // Every game object should have a definition when another objects collides with him
     method whenCollided(value) {
-
+       
     }
 
-    method onCollideDo() {
-
+    // Every game object should have a definition when another objects collides with him
+    method onCollideDo(visual) {
+        
     }
 }

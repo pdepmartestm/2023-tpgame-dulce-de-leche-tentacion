@@ -20,9 +20,10 @@ class Shooter inherits Enemy {
 
 class EnemyBullet inherits Bullet {
     override method onCollideDo(visual) {
-        super(visual)
+        console.println(visual.name())
         if(visual.name() == "player") {
             visual.whenCollided()
+            self.remove()
         }
     }
 }
