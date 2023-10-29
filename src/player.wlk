@@ -26,7 +26,7 @@ class Gun {
     }
 }
 
-object shotgun inherits Gun(magazine = 10, weight = 12, name = "shotgun", bulletsLeft = 15, delayBetweenShots = 500) {
+object shotgun inherits Gun(magazine = 15, weight = 12, name = "shotgun", bulletsLeft = 15, delayBetweenShots = 500) {
     override method shoot(x) {
         super({
             new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
@@ -40,7 +40,7 @@ object sniper inherits Gun(magazine = 10, weight = 20, name = "sniper", bulletsL
         super({new Bullet(position = player.position(), speed = 4, damage = 100, image_name = "heavy-bullet.png").init()})
     }
 }
-object scar inherits Gun(magazine = 10, weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
+object scar inherits Gun(magazine = 30, weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
     override method shoot(x) {
         super({new Bullet(position = player.position(),  speed = 8, damage = 20, image_name = "fast-bullet.png").init()})
     }
