@@ -13,7 +13,6 @@ class Scene {
 object menu inherits Scene {
     override method load() {
         game.boardGround("menu.png")
-        keyboard.enter().onPressDo({sceneManager.load(main)})
         keyboard.h().onPressDo({sceneManager.load(howToPlay)})
     }
 }
@@ -29,19 +28,35 @@ object main inherits Scene {
 
 object howToPlay inherits Scene {
     override method load() {
-        // poner el howToPlay, explicado en objeto menú
+        game.boardGround("menu.png")
+        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }
 
 }
 
 object gameOver inherits Scene {
     override method load() {
-        
+        game.boardGround("menu.png")
+        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
+        keyboard.r().
     }
+}
+
+object selectCharacter inherits Scene {
+    override method load() {
+        keyboard.n().onPressDo({
+            sceneManager.candidato("massa")
+            sceneManager.load(main)})
+        keyboard.m().onPressDo({
+            sceneManager.candidato("milei")
+            sceneManager.load(main)})
+    }
+
 }
 
 object sceneManager {
     var currentScene = menu
+    var property candidato = "massa"
 
     method load(scene) {
         currentScene.remove()

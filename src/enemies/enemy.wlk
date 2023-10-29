@@ -2,16 +2,16 @@ import ui.*
 import _utils.* 
 import gameLoop.*
 import enemies.index.waveManager
+import gameObject.*
 import player.*
 
-class Enemy {
+class Enemy inherits GameObject(name = "enemy") {
     const speed
     const image_name
     const property image = player.selectedPlayer() + "/" + image_name
     var property position = utils.getRandomPosOutOfScreenRight()
     var property health = 100
     const id = utils.generateRandomId()
-
 
     method init() {
         game.addVisual(self)
@@ -28,8 +28,8 @@ class Enemy {
 
     method attack()
 
-    method getDamaged(value) {
-        health -= value
+    method whenCollided(damage) {
+        health -= damage
         if(health <= 0) {
             self.die()
         }

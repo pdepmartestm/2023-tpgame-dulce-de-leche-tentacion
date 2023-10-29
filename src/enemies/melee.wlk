@@ -15,7 +15,7 @@ class Melee inherits Enemy(speed = 2, health = 50, image_name = "melee.png") {
             scheduler.schedule(1000, {position = position.right(50)})
             shouldAttack = false
             scheduler.schedule(5000, {shouldAttack = true})
-            game.onCollideDo(self, {visual => visual.getDamaged(damage)})
+            game.onCollideDo(self, {visual => visual.whenCollided(damage)})
         }
     }
 

@@ -1,10 +1,11 @@
 import _utils.*
 import gameLoop.*
 import player.*
+import gameObject.*
 
-class Bullet {
-    var property position
+class Bullet inherits GameObject(name = "bullet"){
     const id = utils.generateRandomId()
+    var property position
     const speed
     const damage
     const vxScaler = 1
@@ -15,19 +16,23 @@ class Bullet {
     method init() {
         game.addVisual(self)
         gameLoop.add("bullet" + id, {self.move()})
-        game.onCollideDo(self, {visual => visual.getDamaged(damage)})
+        game.whenCollideDo(self, {visual => self.onCollideDo(visual)})
     }   
     
     method move() {
        if(position.x() >= game.width() + 50 || position.x() <= -20) {
-            game.removeVisual(self)
-            gameLoop.remove("bullet" + id)
+           self.remove()
         } 
         position = position.right(vxScaler*speed).up(vyScaler*speed)
     }
 
-    method getDamaged() {      
+    method remove() {
+        game.removeVisual(self)
+        gameLoop.remove("bullet" + id)
+    }
 
+    method onCollideDo(visual) {
+        self.remove()
     }
 }
 

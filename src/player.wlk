@@ -4,6 +4,7 @@ import _scheduler.*
 import _utils.*
 import constants.*
 import bullet.*
+import gameObject.*
 import ui.*
 
 class Gun {
@@ -26,29 +27,36 @@ class Gun {
     }
 }
 
-object shotgun inherits Gun(magazine = 15, weight = 12, name = "shotgun", bulletsLeft = 15, delayBetweenShots = 500) {
+class PlayerBullet inherits Bullet {
+    override method onCollideDo(visual) {
+        super(visual)
+        if(visual.name() ==  "enemy") visual.whenCollided()
+    }  
+}
+
+object shotgun inherits Gun(magazine = 10, weight = 12, name = "shotgun", bulletsLeft = 15, delayBetweenShots = 500) {
     override method shoot(x) {
         super({
-            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
-            new Bullet(position = player.position(), speed = 5, damage = 40, image_name = "heavy-bullet.png").init()
-            new Bullet(position = player.position(), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
+            new PlayerBullet(position = player.position().right(10), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
+            new PlayerBullet(position = player.position().right(10), speed = 5, damage = 40, image_name = "heavy-bullet.png").init()
+            new PlayerBullet(position = player.position().right(10), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image_name = "heavy-bullet.png").init()
         })
     }
 }
 object sniper inherits Gun(magazine = 10, weight = 20, name = "sniper", bulletsLeft = 10, delayBetweenShots = 1000) {
     override method shoot(x) {
-        super({new Bullet(position = player.position(), speed = 4, damage = 100, image_name = "heavy-bullet.png").init()})
+        super({new PlayerBullet(position = player.position().right(10), speed = 4, damage = 100, image_name = "heavy-bullet.png").init()})
     }
 }
 object scar inherits Gun(magazine = 30, weight = 10, name = "scar", bulletsLeft = 30, delayBetweenShots = 500) {
     override method shoot(x) {
-        super({new Bullet(position = player.position(),  speed = 8, damage = 20, image_name = "fast-bullet.png").init()})
+        super({new PlayerBullet(position = player.position().right(10),  speed = 8, damage = 20, image_name = "fast-bullet.png").init()})
     }
 }
 
-object player {
+object player inherits GameObject(name = "player") {
     var property selectedPlayer = "massa"
-    var property weapon = shotgun
+    var property weapon = scar
     const speed = 30 / weapon.weight()
     var isMovingUp = false
     var property health = 100
@@ -78,7 +86,7 @@ object player {
         }
     }
 
-    method getDamaged(damage) {
+    override method whenCollided(damage) {
         health -= damage
         if(health <= 0) self.die()
     }
