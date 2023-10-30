@@ -6,14 +6,16 @@ class Scene {
     method load()
 
     method remove() {
-        game.allVisuals().forEach({visual => game.removeVisual(visual)})
+        game.allVisuals().forEach({visual => visual.remove()})
+        
     }
 }
 
 object sceneManager {
     var currentScene = menu
-    var property cancion = game.sound(player.selectedPlayer()+"/cancion.mp3")
-    const property himno = game.sound("himno.mp3")
+    var property cancion = game.sound("massa/cancion.mp3")
+    var property himno = game.sound("himno.mp3")
+    
     method load(scene) {
         currentScene.remove()
         scene.load()
@@ -24,6 +26,8 @@ object sceneManager {
 object menu inherits Scene {
     override method load() {
         game.boardGround("intro.png")
+        sceneManager.himno(game.sound("himno.mp3"))
+        sceneManager.himno().volume(0.3)
         sceneManager.himno().play()
         keyboard.h().onPressDo({sceneManager.load(howToPlay)})
         keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
@@ -33,6 +37,7 @@ object menu inherits Scene {
 object main inherits Scene {
     override method load() {
         game.boardGround("background.png")
+        sceneManager.cancion(game.sound(player.selectedPlayer() + "/cancion.mp3"))
         sceneManager.himno().pause()
         sceneManager.cancion().volume(0.2)
         sceneManager.cancion().play()

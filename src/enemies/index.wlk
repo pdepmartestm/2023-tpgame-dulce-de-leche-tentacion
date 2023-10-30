@@ -3,13 +3,15 @@ import melee.*
 import player.*
 import _scheduler.*
 import gameVisual.*
+import sceneManager.*
 
 // Wave functionality
 // The wave system will be fairly simple, basically we are gonna create 3 different types of waves, each one with its own items and stuff
 // Each wave will be selected randomly and its difficulty will vary based on the current wave 
 class Wave {
-    const property enemies = []
-    const currentWave
+    var property enemiesToSpawn = 0
+    var property totalEnemiesLeftToSpawn = 0
+    var property enemiesKilled = 0
     
     //This gets used to later check if the player take any damage, if not then we award him with health
     var playerHealthAtStartOfWave = 0
@@ -27,31 +29,32 @@ class Wave {
     }
 }
 
-class NormalWave inherits Wave {
-    var totalEnemiesLeftToSpawn = 0
-    var enemyNumber = 0
-    
+class NormalWave inherits Wave {    
     override method spawnEnemies() {
-        totalEnemiesLeftToSpawn = currentWave
+        if (waveManager.currentWave() == 1) totalEnemiesLeftToSpawn = 1
+        else if (waveManager.currentWave() == 2) totalEnemiesLeftToSpawn = 5
+        else if (waveManager.currentWave() == 3) totalEnemiesLeftToSpawn = 10
+        enemiesToSpawn = totalEnemiesLeftToSpawn
         self.spawnEnemy()
     }
 
     method spawnEnemy() {
-        const rndNum = 0.randomUpTo(2).round()
-        if(rndNum == 0) new Sniper().init()
-        else if(rndNum == 1) new Sniper().init()
-        else if(rndNum == 2) new Sniper().init()
-        enemyNumber += 1
+        const rndNum = 0.randomUpTo(1)
+        if(rndNum <= 0.4) new Sniper().init()
+        else if(rndNum <= 0.8) new Turret().init()
+        else new Melee().init()
+        
         totalEnemiesLeftToSpawn -= 1
 
         if(totalEnemiesLeftToSpawn != 0) {
-            scheduler.schedule(1000, {self.spawnEnemy()})
+            scheduler.schedule(3000, {self.spawnEnemy()})
         }
     }
 }
 
 object waveManager {
-    var property currentWave = 2
+    var property currentWave = 1
+    const totalWaves = 3
     var wave = null
 
     method init() {
@@ -60,25 +63,25 @@ object waveManager {
     }
 
     method startWave() {
-       //TODO a counter before starting the wave and the wave number should be displayed
-       const rndNumber = 0.randomUpTo(0).round()
-       if(rndNumber == 0) 
-        wave = new NormalWave(currentWave = currentWave)
-       wave.start()
+        if(currentWave >= totalWaves) {
+            sceneManager.load(win)
+        }
+        else {
+            wave = new NormalWave()
+            wave.start()
+        }
     }
 
     method nextWave() {
         wave.onWaveFinish()
         currentWave += 1
-        scheduler.schedule(3000, {self.startWave()})
-        player.weapon().bulletsLeft(player.weapon().magazine())
+        scheduler.schedule(2000, {self.startWave()})
         player.health(100)
     }
 
-    method destroyEnemy(enemy) {
-        wave.enemies().remove(enemy)
-        game.removeVisual(enemy)
-        if(wave.enemies().isEmpty()) {
+    method destroyEnemy() {
+        wave.enemiesKilled(wave.enemiesKilled() + 1)
+        if(wave.enemiesKilled() == wave.enemiesToSpawn()) {
             self.nextWave()
         }
     }

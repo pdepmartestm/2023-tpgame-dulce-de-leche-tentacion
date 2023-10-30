@@ -11,4 +11,8 @@ object gameManager {
         game.start()
         sceneManager.load(menu)
     }
+
+    method restart() {
+
+    }
 }

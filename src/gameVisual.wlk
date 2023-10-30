@@ -8,10 +8,15 @@ class GameVisual {
 
 
     method whenCollided(value) {
+
     }
 
     // Every game object should have a definition when another objects collides with him
     method onCollideDo(visual) {
         
+    }
+    
+    method remove() {
+        game.removeVisual(self)
     }
 }

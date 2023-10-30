@@ -73,7 +73,7 @@ object player inherits GameVisual(name = "player") {
         game.addVisual(new BulletsUI (weapon = heavy, position = game.at(game.width() - 100, 20)))
         game.addVisual(new BulletsUI (weapon = scar, position = game.at(game.width() - 150, 20)))
         game.addVisual(new BulletsUI (weapon = shotgun, position = game.at(game.width() - 200, 20)))
-        new HealthBar(parent = self, yOffset = 20, xOffset = -5).init()
+        new HealthBar(parent = self, yOffset = 20, xOffset = -14).init()
         self.setupControls()
         gameLoop.add("player_move", {self.move()})
     } 
@@ -95,6 +95,7 @@ object player inherits GameVisual(name = "player") {
         health -= value
         if(health <= 0) self.die()
     }
+
     method setupControls() {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
@@ -109,7 +110,7 @@ object player inherits GameVisual(name = "player") {
     }
 
     method die() {
-        sceneManager.load(defeat) //TODO make gameOver in main
+        sceneManager.load(defeat) 
     }
 }
 

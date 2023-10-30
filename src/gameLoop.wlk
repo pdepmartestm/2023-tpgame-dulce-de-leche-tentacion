@@ -1,11 +1,10 @@
 import _scheduler.*
 
-
 object gameLoop {
     const fns = new Dictionary()
     
     method start() {
-        scheduler.every(60, "game_loop", {fns.values().forEach({fn => fn.apply()})})
+        scheduler.every(6, "game_loop", {fns.values().forEach({fn => fn.apply()})})
     }
 
     method add(id, fn) {
