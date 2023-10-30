@@ -34,9 +34,8 @@ object main inherits Scene {
     override method load() {
         game.boardGround("background.png")
         sceneManager.himno().pause()
+        sceneManager.cancion().volume(0.2)
         sceneManager.cancion().play()
-        sceneManager.cancion().volume(40)
-        sceneManager.cancion().shouldLoop(4)
         gameLoop.start()
         player.init()
         waveManager.init()
