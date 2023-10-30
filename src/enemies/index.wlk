@@ -4,6 +4,7 @@ import player.*
 import _scheduler.*
 import gameVisual.*
 import sceneManager.*
+import constants.COLORS
 
 // Wave functionality
 // The wave system will be fairly simple, basically we are gonna create 3 different types of waves, each one with its own items and stuff
@@ -31,9 +32,9 @@ class Wave {
 
 class NormalWave inherits Wave {    
     override method spawnEnemies() {
-        if (waveManager.currentWave() == 1) totalEnemiesLeftToSpawn = 1
+        if (waveManager.currentWave() == 1) totalEnemiesLeftToSpawn = 3
         else if (waveManager.currentWave() == 2) totalEnemiesLeftToSpawn = 5
-        else if (waveManager.currentWave() == 3) totalEnemiesLeftToSpawn = 10
+        else if (waveManager.currentWave() == 3) totalEnemiesLeftToSpawn = 8
         enemiesToSpawn = totalEnemiesLeftToSpawn
         self.spawnEnemy()
     }
@@ -88,7 +89,7 @@ object waveManager {
 }
 
 object currentWaveUI inherits GameVisual(name = "waveUI") {
-    method text() = "Wave: " + waveManager.currentWave()
-    method message() = "Wave: " + waveManager.currentWave()
-    method position() = game.at(game.width() - 100, game.height() - 100) 
+    method text() = "Ronda: " + waveManager.currentWave()
+    method textColor() = COLORS.black
+    method position() =  game.at((game.width() / 2) - 100, game.height() - 100)
 }

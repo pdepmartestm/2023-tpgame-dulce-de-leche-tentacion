@@ -2,7 +2,7 @@
 
 Today we want to:
 
--   [ ] Finish collisions
+-   [x] Finish collisions
 -   [x] Finish the different type of guns
 -   [x] Finish UI stuff (namely: health, bulletsLeft, etc)
 -   [x] Every 3 rounds, health resets to 100
@@ -10,9 +10,26 @@ Today we want to:
 
 Tomorrow we'll:
 
--   [ ] Choose character // figma
--   [ ] Don't forget game over screen
--   [ ] Optimization
--   [ ] Finish with the assets, audio, animations and whatnot
--   [ ] Make UI pretty
--   [ ] Test everything and make sure everting works smoothly
+## Mechanics related
+
+-   [x] Choose character
+-   [x] Don't forget game over screen
+-   [x] Wave not advancing // marcos
+-   [x] Melee enemy // marcos
+-   [x] Improve health UI and ammo // marcos
+-   [ ] Stop waveManager when die // marcos
+-   [ ] Fix: Sniper bullet go to player // Marcos
+-   [ ] Optimization // Together
+-   [ ]: Should we restart the magazine every wave or give a fixed amount and make the user administrate it throughout the whole playthrough
+
+## Assets related
+
+-   [ ] Music when winning and loosing? // <ASSIGN>
+-   [ ] Make sure everyone shoots different bullets // <ASSIGN>
+-   [ ] Fix: text in select character // Someone on the firma, probably @frandeclich
+
+## Testing related
+
+-   [x] Change audio playing: instead of playing it when shooting, do it randomly every x seconds // <ASSIGN>
+-   [ ] Test everything and make sure everting works smoothly // Together
+-   [ ] Make everything works on Liam's pc // Together

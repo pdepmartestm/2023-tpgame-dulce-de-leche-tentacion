@@ -2,10 +2,28 @@ import gameLoop.*
 import sceneManager.*
 import _scheduler.*
 import _utils.*
-import constants.*
 import bullet.*
 import gameVisual.*
 import ui.*
+import constants.*
+
+
+object playerGunNames {
+    const property names = new Dictionary() 
+
+    method setGunsNames() {
+        if(player.selectedPlayer() === "masa") {
+            names.put("shotgun", PLAYER_GUNS.massa.shotgun())
+            names.put("scar", PLAYER_GUNS.massa.scar())
+            names.put("heavy", PLAYER_GUNS.massa.heavy())
+        }
+        else {
+            names.put("shotgun", PLAYER_GUNS.milei.shotgun())
+            names.put("scar", PLAYER_GUNS.milei.scar())
+            names.put("heavy", PLAYER_GUNS.milei.heavy())
+        }
+    }
+}
 
 class Gun {
     const property name
@@ -41,7 +59,7 @@ object shotgun inherits Gun(magazine = 10, weight = 12, name = "shotgun", bullet
             new PlayerBullet(position = player.position().right(10), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "multiple.png").init()
             new PlayerBullet(position = player.position().right(10), speed = 5, damage = 40, image_name = "multiple.png").init()
             new PlayerBullet(position = player.position().right(10), speed = 5, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image_name = "multiple.png").init()
-            game.sound(player.selectedPlayer()+"/multiple.mp3").play()
+            game.sound(player.selectedPlayer() + "/multiple.mp3").play()
         })
     }
 }
@@ -70,9 +88,10 @@ object player inherits GameVisual(name = "player") {
     
     method init() {
         game.addVisual(self)
-        game.addVisual(new BulletsUI (weapon = heavy, position = game.at(game.width() - 100, 20)))
-        game.addVisual(new BulletsUI (weapon = scar, position = game.at(game.width() - 150, 20)))
-        game.addVisual(new BulletsUI (weapon = shotgun, position = game.at(game.width() - 200, 20)))
+        game.addVisual(new BulletsUI (weapon = heavy, position = game.at((game.width() / 2) - 240, game.height() - 75)))
+        game.addVisual(new BulletsUI (weapon = scar, position = game.at((game.width() / 2) - 100, game.height() - 75)))
+        game.addVisual(new BulletsUI (weapon = shotgun, position = game.at((game.width() / 2) + 20, game.height() - 75)))
+        playerGunNames.setGunsNames()
         new HealthBar(parent = self, yOffset = 20, xOffset = -14).init()
         self.setupControls()
         gameLoop.add("player_move", {self.move()})
@@ -119,6 +138,6 @@ class BulletsUI inherits GameVisual(name = "bulletsUI") {
     const weapon
     const property position
     
-    method text() = "Bullets: " + weapon.bulletsLeft() + "/" + weapon.magazine()
-    method textColor() = "#FFF"
+    method text() = playerGunNames.names().get(weapon.name()) + ": " + weapon.bulletsLeft()
+    method textColor() = "#fcbf45"
 }
