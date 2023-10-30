@@ -12,8 +12,8 @@ class Scene {
 
 object sceneManager {
     var currentScene = menu
+    var property cancion = game.sound(player.selectedPlayer()+"/cancion.mp3")
     const property himno = game.sound("himno.mp3")
-
     method load(scene) {
         currentScene.remove()
         scene.load()
@@ -34,7 +34,9 @@ object main inherits Scene {
     override method load() {
         game.boardGround("background.jpg")
         sceneManager.himno().pause()
-        game.sound(player.selectedPlayer() + "/cancion.mp3").play()
+        sceneManager.cancion().play()
+        sceneManager.cancion().volume(40)
+        sceneManager.cancion().shouldLoop(4)
         gameLoop.start()
         player.init()
         waveManager.init()
@@ -51,6 +53,7 @@ object howToPlay inherits Scene {
 object win inherits Scene{
     override method load() {
         game.boardGround(player.selectedPlayer()+"/win.png")
+        sceneManager.cancion().stop()
         sceneManager.himno().play()
         keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }

@@ -95,11 +95,13 @@ object player inherits GameVisual(name = "player") {
         health -= value
         if(health <= 0) self.die()
     }
-
     method setupControls() {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
+        keyboard.i().onPressDo({weapon(scar)})
+        keyboard.o().onPressDo({weapon(heavy)})
+        keyboard.p().onPressDo({weapon(shotgun)})
     }
 
     method shoot() {
