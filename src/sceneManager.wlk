@@ -32,7 +32,7 @@ object menu inherits Scene {
 
 object main inherits Scene {
     override method load() {
-        game.boardGround("background.jpg")
+        game.boardGround("background.png")
         sceneManager.himno().pause()
         sceneManager.cancion().play()
         sceneManager.cancion().volume(40)
