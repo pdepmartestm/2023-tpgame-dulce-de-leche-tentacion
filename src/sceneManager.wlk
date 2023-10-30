@@ -10,12 +10,23 @@ class Scene {
     }
 }
 
+object sceneManager {
+    var currentScene = menu
+    const property himno = game.sound("himno.mp3")
+
+    method load(scene) {
+        currentScene.remove()
+        scene.load()
+        currentScene = scene
+    }
+}
+
 object menu inherits Scene {
     override method load() {
         game.boardGround("intro.png")
         sceneManager.himno().play()
         keyboard.h().onPressDo({sceneManager.load(howToPlay)})
-        keyboard.enter().onPressDo({sceneManager.load(main)})
+        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }
 }
 
@@ -23,7 +34,7 @@ object main inherits Scene {
     override method load() {
         game.boardGround("background.jpg")
         sceneManager.himno().pause()
-        game.sound(player.selectedPlayer()+"/cancion.mp3").play()
+        game.sound(player.selectedPlayer() + "/cancion.mp3").play()
         gameLoop.start()
         player.init()
         waveManager.init()
@@ -53,7 +64,7 @@ object defeat inherits Scene {
 }
 
 object selectCharacter inherits Scene {
-    var massa = true
+    var isMassa = true
     override method load() {
         game.boardGround("seleccion-massa.png")
         keyboard.left().onPressDo({self.changeCharacter()})
@@ -61,8 +72,8 @@ object selectCharacter inherits Scene {
         keyboard.a().onPressDo({self.run()})
     }
     method changeCharacter() {
-        massa = !massa
-        if(massa){
+        isMassa = !isMassa
+        if(isMassa){
             game.boardGround("seleccion-massa.png")
         }
         else{
@@ -70,23 +81,12 @@ object selectCharacter inherits Scene {
         }
     }
     method run(){
-        if(massa){
+        if(isMassa){
             player.selectedPlayer("massa")
         }
         else{
             player.selectedPlayer("milei")
         }
         sceneManager.load(main)
-    }
-}
-
-object sceneManager {
-    var currentScene = menu
-    const property himno = game.sound("himno.mp3")
-
-    method load(scene) {
-        currentScene.remove()
-        scene.load()
-        currentScene = scene
     }
 }

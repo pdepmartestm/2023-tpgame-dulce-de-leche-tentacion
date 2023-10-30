@@ -27,7 +27,7 @@ class Gun {
 }
 
 class PlayerBullet inherits Bullet {
-    override method onCollideDo(visual) {
+    method onCollideDo(visual) {
         if(visual.name() ==  "enemy") {
             visual.whenCollided(damage)
             self.remove()
@@ -107,7 +107,7 @@ object player inherits GameVisual(name = "player") {
     }
 
     method die() {
-        sceneManager.load(gameOver) //TODO make gameOver in main
+        sceneManager.load(defeat) //TODO make gameOver in main
     }
 }
 
