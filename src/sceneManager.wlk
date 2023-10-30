@@ -61,6 +61,7 @@ object win inherits Scene{
 object defeat inherits Scene {
     override method load() {
         game.boardGround(player.selectedPlayer()+"/defeat.png")
+        sceneManager.cancion().stop()
         keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }
 }
