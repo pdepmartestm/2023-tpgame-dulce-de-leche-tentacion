@@ -4,13 +4,14 @@ package COLORS {
     const green = "#008000" 
     const yellow = "#ffff00" 
     const red = "#ff0000" 
-    const black = "#478fd1" 
+    const lightBlue = "#478fd1" 
+    const gold = "#fcbf45" 
 }
 
 package SCALERS {
     object shotgunScalers {
-        const property vx = 0.819
-        const property vy = 0.573
+        const property vx = 0.9
+        const property vy = 0.15
     }
 }
 

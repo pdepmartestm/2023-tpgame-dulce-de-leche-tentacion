@@ -90,6 +90,6 @@ object waveManager {
 
 object currentWaveUI inherits GameVisual(name = "waveUI") {
     method text() = "Ronda: " + waveManager.currentWave()
-    method textColor() = COLORS.black
+    method textColor() = COLORS.lightBlue
     method position() =  game.at((game.width() / 2) - 100, game.height() - 100)
 }

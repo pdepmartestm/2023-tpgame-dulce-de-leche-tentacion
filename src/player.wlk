@@ -7,7 +7,6 @@ import gameVisual.*
 import ui.*
 import constants.*
 
-
 object playerGunNames {
     const property names = new Dictionary() 
 
@@ -88,8 +87,8 @@ object player inherits GameVisual(name = "player") {
     
     method init() {
         game.addVisual(self)
-        game.addVisual(new BulletsUI (weapon = heavy, position = game.at((game.width() / 2) - 240, game.height() - 75)))
         game.addVisual(new BulletsUI (weapon = scar, position = game.at((game.width() / 2) - 100, game.height() - 75)))
+        game.addVisual(new BulletsUI (weapon = heavy, position = game.at((game.width() / 2) - 240, game.height() - 75)))
         game.addVisual(new BulletsUI (weapon = shotgun, position = game.at((game.width() / 2) + 20, game.height() - 75)))
         playerGunNames.setGunsNames()
         new HealthBar(parent = self, yOffset = 20, xOffset = -14).init()
@@ -119,9 +118,9 @@ object player inherits GameVisual(name = "player") {
         keyboard.w().onPressDo({isMovingUp = true})
         keyboard.s().onPressDo({isMovingUp = false})
         keyboard.space().onPressDo({self.shoot()})
-        keyboard.i().onPressDo({weapon = scar})
-        keyboard.o().onPressDo({weapon = heavy})
-        keyboard.p().onPressDo({weapon = shotgun})
+        keyboard.num1().onPressDo({weapon = scar})
+        keyboard.num2().onPressDo({weapon = heavy})
+        keyboard.num3().onPressDo({weapon = shotgun})
     }
 
     method shoot() {
@@ -139,5 +138,5 @@ class BulletsUI inherits GameVisual(name = "bulletsUI") {
     const property position
     
     method text() = playerGunNames.names().get(weapon.name()) + ": " + weapon.bulletsLeft()
-    method textColor() = "#fcbf45"
+    method textColor() = COLORS.gold
 }

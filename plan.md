@@ -18,10 +18,9 @@ Tomorrow we'll:
 -   [x] Melee enemy // marcos
 -   [x] Improve health UI and ammo // marcos
 -   [x] Stop waveManager when die // marcos
--   [ ] Keyboard: on k // Marcos
+-   [x] Shotgun aperture of bullets // marcos
 -   [ ] Optimization // Together
 -   [ ] Fix: Sniper bullet go to player // Marcos
--   [ ]: Should we restart the magazine every wave or give a fixed amount and make the user administrate it throughout the whole playthrough
 
 ## Assets related
 
