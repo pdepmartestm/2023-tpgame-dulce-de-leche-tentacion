@@ -33,3 +33,4 @@ Tomorrow we'll:
 -   [x] Change audio playing: instead of playing it when shooting, do it randomly every x seconds // <ASSIGN>
 -   [ ] Test everything and make sure everting works smoothly // Together
 -   [ ] Make everything works on Liam's pc // Together
+-   [ ] 

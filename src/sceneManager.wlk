@@ -2,6 +2,8 @@ import enemies.index.*
 import gameLoop.*
 import player.*
 
+//Aprovechar herencia
+
 class Scene {
     method load()
 
@@ -71,7 +73,7 @@ object defeat inherits Scene {
 }
 
 object selectCharacter inherits Scene {
-    var isMassa = true
+    var isMassa = true // ver de no usar la flag, y hacer para más personajes
     override method load() {
         game.boardGround("seleccion-massa.png")
         keyboard.left().onPressDo({self.changeCharacter()})

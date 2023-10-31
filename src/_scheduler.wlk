@@ -16,6 +16,6 @@ object scheduler {
     // Workround for the game.schedule which, again, seems to not be working
     method schedule(ms, fn) {
         const id = utils.generateRandomId()
-        game.onTick(ms * 10, id, {fn.apply() game.removeTickEvent(id)})
+        game.onTick(ms * 10, id, {fn.apply() self.stop(id)})
     }
 }
