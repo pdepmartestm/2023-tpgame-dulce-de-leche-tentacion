@@ -2,21 +2,26 @@
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+-   Alguien
+-   Persona
+-   etc.
 
 ## Capturas
 
-(agregar)
+## Milei en accion
+
+![milei](./videos/milei.mp4)
+
+## Se ve se siente massa presidente
+
+![massa](./videos/massa.mp4)
 
 ## Reglas de Juego / Instrucciones
 
 (Escribirlas)
 
-
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+-   Curso/Facultad
+-   Versión de wollok
+-   Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
