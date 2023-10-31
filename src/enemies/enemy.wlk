@@ -52,7 +52,8 @@ class Enemy inherits GameVisual(name = "enemy") {
 
     override method remove() {
         super()
-        self.die()
+        gameLoop.remove(moveId)
+        scheduler.stop(attackId)
         self.stopMoving()
     }
 }

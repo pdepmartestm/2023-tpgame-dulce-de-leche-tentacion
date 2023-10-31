@@ -17,9 +17,10 @@ Tomorrow we'll:
 -   [x] Wave not advancing // marcos
 -   [x] Melee enemy // marcos
 -   [x] Improve health UI and ammo // marcos
--   [ ] Stop waveManager when die // marcos
--   [ ] Fix: Sniper bullet go to player // Marcos
+-   [x] Stop waveManager when die // marcos
+-   [ ] Keyboard: on k // Marcos
 -   [ ] Optimization // Together
+-   [ ] Fix: Sniper bullet go to player // Marcos
 -   [ ]: Should we restart the magazine every wave or give a fixed amount and make the user administrate it throughout the whole playthrough
 
 ## Assets related

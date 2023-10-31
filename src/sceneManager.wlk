@@ -7,7 +7,6 @@ class Scene {
 
     method remove() {
         game.allVisuals().forEach({visual => visual.remove()})
-        
     }
 }
 

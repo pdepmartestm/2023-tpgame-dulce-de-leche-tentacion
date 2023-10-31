@@ -12,7 +12,7 @@ object playerGunNames {
     const property names = new Dictionary() 
 
     method setGunsNames() {
-        if(player.selectedPlayer() === "masa") {
+        if(player.selectedPlayer() === "massa") {
             names.put("shotgun", PLAYER_GUNS.massa.shotgun())
             names.put("scar", PLAYER_GUNS.massa.scar())
             names.put("heavy", PLAYER_GUNS.massa.heavy())

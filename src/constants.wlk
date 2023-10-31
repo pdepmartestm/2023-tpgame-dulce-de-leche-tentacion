@@ -18,7 +18,7 @@ package PLAYER_GUNS {
      object massa {
         const property shotgun = "Choripanes"
         const property scar = "Bananas"
-        const property heavy = "Presto polenta"
+        const property heavy = "Polenta"
     }
 
     object milei {
