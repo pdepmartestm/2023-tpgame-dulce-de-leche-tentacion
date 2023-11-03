@@ -32,9 +32,7 @@ class Wave {
 
 class NormalWave inherits Wave {    
     override method spawnEnemies() {
-        if (waveManager.currentWave() == 1) totalEnemiesLeftToSpawn = 3
-        else if (waveManager.currentWave() == 2) totalEnemiesLeftToSpawn = 5
-        else if (waveManager.currentWave() == 3) totalEnemiesLeftToSpawn = 8
+        totalEnemiesLeftToSpawn = 3 * waveManager.currentWave()
         enemiesToSpawn = totalEnemiesLeftToSpawn
         self.spawnEnemy()
     }

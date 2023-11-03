@@ -77,14 +77,16 @@ object scar inherits Gun(magazine = 30, weight = 10, name = "scar", bulletsLeft 
 }
 
 object player inherits GameVisual(name = "player") {
-    var property selectedPlayer = "massa"
+    var property selectedPlayer = players.get(index)
+    const players = ["massa", "milei"]
     var property weapon = scar
+    var index = 0
     const speed = 30 / weapon.weight()
     var isMovingUp = false
     var property health = 100
     var property position = game.at(0, 400)
     method image() = selectedPlayer  + "/player.png"
-    
+
     method init() {
         game.addVisual(self)
         game.addVisual(new BulletsUI (weapon = scar, position = game.at((game.width() / 2) - 100, game.height() - 75)))
@@ -129,6 +131,16 @@ object player inherits GameVisual(name = "player") {
 
     method die() {
         sceneManager.load(defeat) 
+    }
+    method changeCharacter(){
+        if(selectedPlayer == players.last()){ // Hacemos así porque no anda length
+            index = 0
+            selectedPlayer = players.get(index)
+        }
+        else {
+            index += 1
+            selectedPlayer = players.get(index)
+        }
     }
 }
 

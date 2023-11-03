@@ -73,29 +73,15 @@ object defeat inherits Scene {
 }
 
 object selectCharacter inherits Scene {
-    var isMassa = true // ver de no usar la flag, y hacer para más personajes
+    //hacer para varios personajes
     override method load() {
-        game.boardGround("seleccion-massa.png")
+        game.boardGround(player.selectedPlayer()+"/seleccion.png")
         keyboard.left().onPressDo({self.changeCharacter()})
         keyboard.right().onPressDo({self.changeCharacter()})
-        keyboard.a().onPressDo({self.run()})
+        keyboard.a().onPressDo({sceneManager.load(main)})
     }
     method changeCharacter() {
-        isMassa = !isMassa
-        if(isMassa){
-            game.boardGround("seleccion-massa.png")
-        }
-        else{
-            game.boardGround("seleccion-milei.png")
-        }
-    }
-    method run(){
-        if(isMassa){
-            player.selectedPlayer("massa")
-        }
-        else{
-            player.selectedPlayer("milei")
-        }
-        sceneManager.load(main)
+        player.changeCharacter()
+        game.boardGround(player.selectedPlayer()+"/seleccion.png")
     }
 }
