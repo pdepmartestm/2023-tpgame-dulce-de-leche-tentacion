@@ -28,3 +28,7 @@ package PLAYER_GUNS {
         const property heavy = "Motosierra"
     }
 }
+
+package PLAYER {
+    const players = ["massa", "milei"]
+}

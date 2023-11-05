@@ -1,5 +1,6 @@
 
 import Player._index.*
+import _constants.PLAYER
 import Enemies._index.*
 import Scenes._index.*
 import Engine._scene.*
@@ -60,15 +61,16 @@ object defeat inherits Scene {
 }
 
 object selectCharacter inherits Scene {
-    //hacer para varios personajes
+    var index = 0
     override method load() {
         game.boardGround(player.selectedPlayer()+"/seleccion.png")
-        keyboard.left().onPressDo({self.changeCharacter()})
-        keyboard.right().onPressDo({self.changeCharacter()})
+        keyboard.left().onPressDo({if(index != 0) index -= 1 self.changeCharacter()})
+        keyboard.right().onPressDo({if(index < PLAYER.players.size() - 1) index += 1 self.changeCharacter()})
         keyboard.a().onPressDo({sceneManager.load(main)})
     }
+
     method changeCharacter() {
-        player.changeCharacter()
+        player.changeCharacter(index)
         game.boardGround(player.selectedPlayer()+"/seleccion.png")
     }
 }

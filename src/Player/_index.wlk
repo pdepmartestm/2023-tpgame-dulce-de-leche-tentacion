@@ -3,17 +3,20 @@ import Scenes._scenes.*
 import Engine._gameVisual.*
 import Player._guns.*
 import _ui.*
+import _constants.PLAYER
 
 
 object player inherits GameVisual(name = "player") {
-    var property selectedPlayer = players.get(index)
-    const players = ["massa", "milei"]
+    var property selectedPlayer = PLAYER.players.get(0)
+
+    // Characteristics
     var property weapon = scar
-    var index = 0
     const speed = 30 / weapon.weight()
     var isMovingUp = false
     var property health = 100
+
     var property position = game.at(0, 400)
+
     method image() = selectedPlayer  + "/player.png"
 
     override method onStart() {
@@ -64,15 +67,8 @@ object player inherits GameVisual(name = "player") {
         sceneManager.load(defeat) 
     }
 
-    method changeCharacter(){
-        if(selectedPlayer == players.last()){ // Hacemos así porque no anda length
-            index = 0
-            selectedPlayer = players.get(index)
-        }
-        else {
-            index += 1
-            selectedPlayer = players.get(index)
-        }
+    method changeCharacter(playerIndex) {
+        selectedPlayer = PLAYER.players.get(playerIndex)
     }
 }
 
