@@ -11,13 +11,13 @@ object player inherits GameVisual(name = "player") {
 
     // Characteristics
     var property weapon = scar
-    const speed = 30 / weapon.weight()
+    const speed = PLAYER.speed
     var isMovingUp = false
-    var property health = 100
+    var property health = PLAYER.health
 
     var property position = game.at(0, 400)
 
-    method image() = selectedPlayer.name()  + "/player.png"
+    method image() = selectedPlayer.name() + "/" + PLAYER.imageName
 
     override method onStart() {
         new BulletsUI (weapon = scar, position = game.at((game.width() / 2) - 240, game.height() - 75)).load()

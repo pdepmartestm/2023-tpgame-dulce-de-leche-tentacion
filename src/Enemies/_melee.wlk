@@ -1,9 +1,10 @@
 import Enemies._enemy.*
 import Player._index.*
 import Engine._scheduler.*
+import _constants.ENEMIES.melee
 
-class Melee inherits Enemy(speed = 5, health = 50, image_name = "melee.png", attackInterval = 5000) { 
-    const damage = 5
+class Melee inherits Enemy(speed = melee.speed(), health = melee.health(), image_name = melee.imageName(), attackInterval = melee.attackInterval()) { 
+    const damage = melee.damage()
     var shouldAttack = false 
     var shouldMoveOnY = true
     var moveOnY = speed
@@ -28,11 +29,11 @@ class Melee inherits Enemy(speed = 5, health = 50, image_name = "melee.png", att
         position = position.up(yToMove)
         moveOnY = yToMove
         shouldMoveOnY = false
-        scheduler.schedule(500, {shouldMoveOnY = true})
+        scheduler.schedule(melee.yMovementDelay(), {shouldMoveOnY = true})
     }
 
     override method move() {
-        if(position.x() >= 100) 
+        if(position.x() >= melee.moveUntil()) 
             position = position.left(speed)
         if(shouldMoveOnY)
             self.moveY()

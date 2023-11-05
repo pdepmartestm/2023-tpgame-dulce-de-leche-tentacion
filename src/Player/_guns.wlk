@@ -3,13 +3,13 @@ import Engine._gameVisual.*
 import Player._index.*
 import _ui.*
 import Common._bullet.*
-import _constants.*
+import _constants.PLAYER.*
+import _constants.COLORS
 
 class Gun {
     const property name = {}
     const property weight
-    var property magazine
-    var property bulletsLeft = magazine
+    var property bulletsLeft
     const delayBetweenShots
     var shouldShoot = true
 
@@ -42,26 +42,27 @@ class BulletsUI inherits GameVisual(name = "bulletsUI") {
 
 
 // ============ Guns definitions ============
-object shotgun inherits Gun(magazine = 10, weight = 12, name = {player.selectedPlayer().shotgun()}, bulletsLeft = 15, delayBetweenShots = 500) {
+object shotgun inherits Gun(weight = shotgunConsts.weight(), name = {player.selectedPlayer().shotgun()}, bulletsLeft = shotgunConsts.bullets(), delayBetweenShots = shotgunConsts.delayBetweenShots()) {
     override method shoot(x) {
         super({
-            new PlayerBullet(position = player.position().right(10), speed = 9, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = SCALERS.shotgunScalers.vy(), damage = 40, image_name = "multiple.png").load()
-            new PlayerBullet(position = player.position().right(10), speed = 9, damage = 40, image_name = "multiple.png").load()
-            new PlayerBullet(position = player.position().right(10), speed = 9, vxScaler = SCALERS.shotgunScalers.vx(), vyScaler = -SCALERS.shotgunScalers.vy(), damage = 40, image_name = "multiple.png").load()
-            game.sound(player.selectedPlayer().name()  + "/multiple.mp3").play()
+            new PlayerBullet(position = player.position(), speed = shotgunConsts.speed(), vxScaler = shotgunConsts.vxScaler(), vyScaler = shotgunConsts.vyScaler(), damage = shotgunConsts.damage(), image_name = shotgunConsts.bulletImage()).load()
+            new PlayerBullet(position = player.position(), speed = shotgunConsts.speed(), damage = shotgunConsts.damage(), image_name = shotgunConsts.bulletImage()).load()
+            new PlayerBullet(position = player.position(), speed = shotgunConsts.speed(), vxScaler = shotgunConsts.vxScaler(), vyScaler = -shotgunConsts.vyScaler(), damage = shotgunConsts.damage(), image_name = shotgunConsts.bulletImage()).load()
+            game.sound(player.selectedPlayer().name() + shotgunConsts.sound()).play()
         })
     }
 }
-object heavy inherits Gun(magazine = 10, weight = 20, name = {player.selectedPlayer().heavy()}, bulletsLeft = 10, delayBetweenShots = 1000) {
+
+object heavy inherits Gun(weight = heavyConsts.weight(), name = {player.selectedPlayer().heavy()}, bulletsLeft = heavyConsts.bullets(), delayBetweenShots = heavyConsts.delayBetweenShots()) {
     override method shoot(x) {
-        super({new PlayerBullet(position = player.position().right(10), speed = 7, damage = 100, image_name = "heavy-bullet.png").load()
-        game.sound(player.selectedPlayer().name() +"/heavy.mp3").play()})
+        super({new PlayerBullet(position = player.position(), speed = heavyConsts.speed(), damage = heavyConsts.damage(), image_name = heavyConsts.bulletImage()).load()
+        game.sound(player.selectedPlayer().name() + heavyConsts.sound()).play()})
     }
 }
 
-object scar inherits Gun(magazine = 30, weight = 10, name = {player.selectedPlayer().scar()}, bulletsLeft = 30, delayBetweenShots = 500) {
+object scar inherits Gun(weight = scarConsts.weight(), name = {player.selectedPlayer().scar()}, bulletsLeft = scarConsts.bullets(), delayBetweenShots = scarConsts.delayBetweenShots()) {
     override method shoot(x) {
-        super({new PlayerBullet(position = player.position().right(10),  speed = 15, damage = 20, image_name = "fast-bullet.png").load()
-        game.sound(player.selectedPlayer().name() +"/fast.mp3").play()})
+        super({new PlayerBullet(position = player.position(),  speed = scarConsts.speed(), damage = scarConsts.damage(), image_name = scarConsts.bulletImage()).load()
+        game.sound(player.selectedPlayer().name() + scarConsts.sound()).play()})
     }
 }

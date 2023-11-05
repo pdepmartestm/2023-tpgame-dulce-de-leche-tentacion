@@ -5,6 +5,7 @@ import Engine._gameLoop.*
 import Engine._scheduler.*
 import Player._index.*
 import Common._bullet.*
+import _constants.ENEMIES.*
 
 class Shooter inherits Enemy {
     const moveUntil
@@ -27,19 +28,19 @@ class EnemyBullet inherits Bullet {
     }
 }
 
-class Sniper inherits Shooter(image_name = "sniper.png", speed = 4,  moveUntil = 150, attackInterval = 3000) {
+class Sniper inherits Shooter(image_name = sniper.imageName(), speed = sniper.speed(),  moveUntil = sniper.moveUntil(), attackInterval = sniper.attackInterval()) {
     override method attack() {
         // From the cinematic equations of the player and bullet we can solve the y velocity in order to hit the player
         // I guess cinematcis were important after all...
         const vyScaler = -(player.position().y() - position.y()) / ((player.position().x() - position.x()) / 5)
-        new EnemyBullet (damage = 25, speed = 5, image_name = "sniper_bullet.png", vyScaler = vyScaler, vxScaler = -3, position = position.left(10)).load()
+        new EnemyBullet (damage = sniper.damage(), speed = sniper.bulletSpeed(), image_name = sniper.bulletImageName(), vyScaler = vyScaler, vxScaler = -3, position = position.left(10)).load()
     }
 }
 
 // They only shoot ahead, witouth pointing to the player
-class Turret inherits Shooter(image_name = "turret.png", speed = 4, moveUntil = 200, attackInterval = 4000) {
+class Turret inherits Shooter(image_name = turret.imageName(), speed = turret.speed(), moveUntil = turret.moveUntil(), attackInterval = turret.attackInterval()) {
     override method attack() {
-        new EnemyBullet (damage = 25, speed = 8, vxScaler = -1, image_name = "turret_bullet.png", position = position.left(10)).load()
+        new EnemyBullet (damage = turret.damage(), speed = turret.speed(), vxScaler = -1, image_name = sniper.bulletImageName(), position = position.left(10)).load()
     }
 }
 
