@@ -1,30 +1,57 @@
 
 import Player._index.*
-import _constants.PLAYER
 import Enemies._index.*
 import Scenes._index.*
+import _constants.PLAYER
 import Engine._scene.*
 import Engine._gameLoop.*
 
-
 object menu inherits Scene {
     override method load() {
-        game.boardGround("intro.png")
-        sceneManager.himno(game.sound("himno.mp3"))
-        sceneManager.himno().volume(0.3)
-        sceneManager.himno().play()
+        self.setup("intro.png", "himno.mp3", 0.3)
         keyboard.h().onPressDo({sceneManager.load(howToPlay)})
         keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
     }
+    
+    // We don't want to stop the audio on this scene. We want it to sound until the user selects a character
+    override method remove() {
+        self.removeAllVisuals()
+    }
+}
+
+object howToPlay inherits Scene {
+    override method load() {
+        self.changeBg("how-to-play.png")
+    }
+
+    // Same as above
+    override method remove() {
+        self.removeAllVisuals()
+    }
+}
+
+
+// Here is where the audio gets removed. 
+object selectCharacter inherits Scene {
+    var index = 0
+
+    override method load() {
+        self.changeBg(player.selectedPlayer() + "/seleccion.png")
+        keyboard.left().onPressDo({if(index != 0) index -= 1 self.changeCharacter()})
+        keyboard.right().onPressDo({if(index < PLAYER.players.size() - 1) index += 1 self.changeCharacter()})
+        keyboard.a().onPressDo({sceneManager.load(main)})
+    }
+
+    method changeCharacter() {
+        player.changeCharacter(index)
+        self.changeBg(player.selectedPlayer() + "/seleccion.png")
+    }
+
 }
 
 object main inherits Scene {
     override method load() {
-        game.boardGround("background.png")
-        sceneManager.cancion(game.sound(player.selectedPlayer() + "/cancion.mp3"))
-        sceneManager.himno().pause()
-        sceneManager.cancion().volume(0.2)
-        sceneManager.cancion().play()
+        self.setup("background.png", player.selectedPlayer() + "/cancion.mp3", 0.2)
         gameLoop.start()
         player.load()
         waveManager.onStart()
@@ -36,41 +63,14 @@ object main inherits Scene {
     }
 }
 
-object howToPlay inherits Scene {
-    override method load() {
-        game.boardGround("how-to-play.png")
-        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
-    }
-}
-
 object win inherits Scene{
     override method load() {
-        game.boardGround(player.selectedPlayer()+"/win.png")
-        sceneManager.cancion().stop()
-        sceneManager.himno().play()
-        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
+        self.setup(player.selectedPlayer() + "/win.png", null, 0)
     }
 }
 
 object defeat inherits Scene {
     override method load() {
-        game.boardGround(player.selectedPlayer()+"/defeat.png")
-        sceneManager.cancion().stop()
-        keyboard.enter().onPressDo({sceneManager.load(selectCharacter)})
-    }
-}
-
-object selectCharacter inherits Scene {
-    var index = 0
-    override method load() {
-        game.boardGround(player.selectedPlayer()+"/seleccion.png")
-        keyboard.left().onPressDo({if(index != 0) index -= 1 self.changeCharacter()})
-        keyboard.right().onPressDo({if(index < PLAYER.players.size() - 1) index += 1 self.changeCharacter()})
-        keyboard.a().onPressDo({sceneManager.load(main)})
-    }
-
-    method changeCharacter() {
-        player.changeCharacter(index)
-        game.boardGround(player.selectedPlayer()+"/seleccion.png")
+        self.setup(player.selectedPlayer() + "/defeat.png", null, 0)
     }
 }
