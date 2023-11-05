@@ -1,7 +1,6 @@
-import enemies.enemy.*
-import main.gameManager
-import player.*
-import _scheduler.*
+import Enemies._enemy.*
+import Player._index.*
+import Engine._scheduler.*
 
 class Melee inherits Enemy(speed = 5, health = 50, image_name = "melee.png", attackInterval = 5000) { 
     const damage = 5
@@ -17,7 +16,7 @@ class Melee inherits Enemy(speed = 5, health = 50, image_name = "melee.png", att
         return null
     }
 
-    method onCollideDo(visual) {
+    override method onCollideDo(visual) {
         if(visual.name() == "player")
             visual.whenCollided(damage)
     }

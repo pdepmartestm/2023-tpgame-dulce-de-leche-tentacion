@@ -1,10 +1,11 @@
-import shooters.*
-import melee.*
-import player.*
-import _scheduler.*
-import gameVisual.*
-import sceneManager.*
-import constants.COLORS
+import Enemies._shooters.*
+import Enemies._melee.*
+import Engine._scheduler.*
+import Engine._gameVisual.*
+import Player._index.*
+import Scenes._index.*
+import Scenes._scenes.*
+import _constants.COLORS
 
 // Wave functionality
 // The wave system will be fairly simple, basically we are gonna create 3 different types of waves, each one with its own items and stuff
@@ -39,9 +40,9 @@ class NormalWave inherits Wave {
 
     method spawnEnemy() {
         const rndNum = 0.randomUpTo(1)
-        if(rndNum <= 0.4) new Sniper().init()
-        else if(rndNum <= 0.8) new Turret().init()
-        else new Melee().init()
+        if(rndNum <= 0.4) new Sniper().load()
+        else if(rndNum <= 0.8) new Turret().load()
+        else new Melee().load()
         
         totalEnemiesLeftToSpawn -= 1
 
@@ -56,9 +57,9 @@ object waveManager {
     const totalWaves = 3
     var wave = null
 
-    method init() {
+    method onStart() {
         self.startWave()
-        game.addVisual(currentWaveUI)
+        currentWaveUI.load()
     }
 
     method startWave() {

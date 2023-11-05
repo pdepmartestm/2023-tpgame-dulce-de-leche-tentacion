@@ -1,4 +1,4 @@
-import player.*
+import Player._index.*
 
 package COLORS {
     const green = "#008000" 

@@ -1,4 +1,4 @@
-import _scheduler.*
+import Engine._scheduler.*
 
 object gameLoop {
     const fns = new Dictionary()
@@ -7,6 +7,10 @@ object gameLoop {
         scheduler.every(6, "game_loop", {fns.values().forEach({fn => fn.apply()})})
     }
 
+    method stop() {
+        scheduler.stop("game_loop")
+    }
+    
     method add(id, fn) {
         fns.put(id, fn)
     }
@@ -14,4 +18,5 @@ object gameLoop {
     method remove(id) {
         fns.remove(id)
     }
+
 }

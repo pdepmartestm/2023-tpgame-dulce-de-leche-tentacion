@@ -1,8 +1,8 @@
-import constants.COLORS.*
-import gameVisual.*
+import _constants.COLORS.*
+import Engine._gameVisual.*
 
 /**
-* This class expects an object with a health and position values defined
+* @param parent: expects a visual 
 */
 class HealthBar inherits GameVisual(name = "HealthBarUI") {
     const parent
@@ -19,9 +19,5 @@ class HealthBar inherits GameVisual(name = "HealthBarUI") {
         if(parent.health() > 75) return green
         if(parent.health() < 25) return red
         return yellow
-    }
-
-    method init() {
-        game.addVisual(self)
     }
 }

@@ -1,7 +1,7 @@
 import _utils.*
-import gameLoop.*
-import player.*
-import gameVisual.*
+import Engine._gameLoop.*
+import Engine._gameVisual.*
+import Player._index.*
 
 class Bullet inherits GameVisual(name = "bullet"){
     var property position
@@ -12,21 +12,11 @@ class Bullet inherits GameVisual(name = "bullet"){
     const image_name
     const property image = player.selectedPlayer() + "/" + image_name
 
-    method init() {
-        game.addVisual(self)
-        gameLoop.add("bullet" + id, {self.move()})
-    }   
-    
-    method move() {
-       if(position.x() >= game.width() + 50 || position.x() <= -20) {
+    override method onUpdate() {
+        if(position.x() >= game.width() + 50 || position.x() <= -20) {
            self.remove()
         } 
         position = position.right(vxScaler*speed).up(vyScaler*speed)
-    }
-
-    method remove() {
-        game.removeVisual(self)
-        gameLoop.remove("bullet" + id)
     }
 }
 
