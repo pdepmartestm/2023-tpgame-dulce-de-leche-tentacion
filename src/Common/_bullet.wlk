@@ -10,7 +10,7 @@ class Bullet inherits GameVisual(name = "bullet"){
     const vxScaler = 1
     const vyScaler = 0
     const image_name
-    const property image = player.selectedPlayer() + "/" + image_name
+    const property image = player.selectedPlayer().name() + "/" + image_name
 
     override method onUpdate() {
         if(position.x() >= game.width() + 50 || position.x() <= -20) {

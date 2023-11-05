@@ -17,12 +17,11 @@ object player inherits GameVisual(name = "player") {
 
     var property position = game.at(0, 400)
 
-    method image() = selectedPlayer  + "/player.png"
+    method image() = selectedPlayer.name()  + "/player.png"
 
     override method onStart() {
-        playerGunNames.setGunsNames()
-        new BulletsUI (weapon = scar, position = game.at((game.width() / 2) - 100, game.height() - 75)).load()
-        new BulletsUI (weapon = heavy, position = game.at((game.width() / 2) - 240, game.height() - 75)).load()
+        new BulletsUI (weapon = scar, position = game.at((game.width() / 2) - 240, game.height() - 75)).load()
+        new BulletsUI (weapon = heavy, position = game.at((game.width() / 2) - 100, game.height() - 75)).load()
         new BulletsUI (weapon = shotgun, position = game.at((game.width() / 2) + 20, game.height() - 75)).load()
         new HealthBar(parent = self, yOffset = 20, xOffset = -14).load()
         self.setupControls()

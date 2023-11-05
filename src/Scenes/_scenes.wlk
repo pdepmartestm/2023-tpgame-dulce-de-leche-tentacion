@@ -36,7 +36,7 @@ object selectCharacter inherits Scene {
     var index = 0
 
     override method load() {
-        self.changeBg(player.selectedPlayer() + "/seleccion.png")
+        self.changeBg(player.selectedPlayer().name() + "/seleccion.png")
         keyboard.left().onPressDo({if(index != 0) index -= 1 self.changeCharacter()})
         keyboard.right().onPressDo({if(index < PLAYER.players.size() - 1) index += 1 self.changeCharacter()})
         keyboard.a().onPressDo({sceneManager.load(main)})
@@ -44,14 +44,14 @@ object selectCharacter inherits Scene {
 
     method changeCharacter() {
         player.changeCharacter(index)
-        self.changeBg(player.selectedPlayer() + "/seleccion.png")
+        self.changeBg(player.selectedPlayer().name() + "/seleccion.png")
     }
 
 }
 
 object main inherits Scene {
     override method load() {
-        self.setup("background.png", player.selectedPlayer() + "/cancion.mp3", 0.2)
+        self.setup("background.png", player.selectedPlayer().name() + "/cancion.mp3", 0.2)
         gameLoop.start()
         player.load()
         waveManager.onStart()
@@ -65,12 +65,12 @@ object main inherits Scene {
 
 object win inherits Scene{
     override method load() {
-        self.setup(player.selectedPlayer() + "/win.png", null, 0)
+        self.setup(player.selectedPlayer().name() + "/win.png", null, 0)
     }
 }
 
 object defeat inherits Scene {
     override method load() {
-        self.setup(player.selectedPlayer() + "/defeat.png", null, 0)
+        self.setup(player.selectedPlayer().name() + "/defeat.png", null, 0)
     }
 }

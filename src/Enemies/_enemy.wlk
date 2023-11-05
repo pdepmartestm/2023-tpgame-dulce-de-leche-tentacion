@@ -12,7 +12,7 @@ class Enemy inherits GameVisual(name = "enemy") {
     const attackId = "attack" + id
     var property isAlive = true
     const image_name
-    const property image = player.selectedPlayer() + "/" + image_name
+    const property image = player.selectedPlayer().name() + "/" + image_name
     var property position = utils.getRandomPosOutOfScreenRight()
     var property health = 100
     const healthBar = new HealthBar(parent = self, yOffset = 20, xOffset = -20)

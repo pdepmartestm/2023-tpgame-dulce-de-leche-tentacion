@@ -15,20 +15,19 @@ package SCALERS {
     }
 }
 
-package PLAYER_GUNS {
-     object massa {
+package PLAYER {
+    object massa {
+        const property name = "massa"
         const property shotgun = "Choripanes"
         const property scar = "Bananas"
         const property heavy = "Polenta"
     }
 
     object milei {
+        const property name = "milei"
         const property shotgun = "Organos"
         const property scar = "Bananas"
         const property heavy = "Motosierra"
     }
-}
-
-package PLAYER {
-    const players = ["massa", "milei"]
+    const players = [massa, milei]
 }
