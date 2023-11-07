@@ -1,27 +1,23 @@
-# Nombre del juego (<- borrar y completar)
+# Ballotage 23
 
 ## Equipo de desarrollo
 
--   Alguien
--   Persona
--   etc.
+-   Liam Ezekiel Wilk
+-   Marcos Nicolau
+-   Francisco Declich
+-   Celeste Dellisola
+
+## Instrucciones
+
+![](./assets/how-to-play.png)
 
 ## Capturas
 
-## Milei en accion
+![](./assets/showcase.mp4)
 
-![milei](./videos/milei.mp4)
-
-## Se ve se siente massa presidente
-
-![massa](./videos/massa.mp4)
-
-## Reglas de Juego / Instrucciones
-
-(Escribirlas)
 
 ## Otros
 
--   Curso/Facultad
--   Versión de wollok
--   Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+-   Curso/Facultad: Martes mañana en UTN FRBA
+-   Versión de wollok: Wollok TS (modificado)
+-   Una vez terminado, no tenemos problemas en que el repositorio sea público
