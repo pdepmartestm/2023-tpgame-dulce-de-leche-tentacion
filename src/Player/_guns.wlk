@@ -1,7 +1,7 @@
 import Engine._scheduler.*
 import Engine._gameVisual.*
 import Player._index.*
-import _ui.*
+import Common._ui.*
 import Common._bullet.*
 import _constants.PLAYER.*
 import _constants.COLORS

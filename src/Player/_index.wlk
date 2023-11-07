@@ -2,7 +2,7 @@ import Scenes._index.*
 import Scenes._scenes.*
 import Engine._gameVisual.*
 import Player._guns.*
-import _ui.*
+import Common._ui.*
 import _constants.PLAYER
 
 
