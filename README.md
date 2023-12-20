@@ -15,6 +15,12 @@ A raíz de esto, es que tuvimos que extender las herramientas a nuestras necesid
 
 ## Capturas
 
+
+https://github.com/pdepmartestm/2023-tpgame-dulce-de-leche-tentacion/assets/76252340/c6f7f005-f2e9-4aa4-8e18-142adbcc4bfe
+
+
+
+
 ## Otros
 
 -   Curso/Facultad: Martes mañana en UTN FRBA
