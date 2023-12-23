@@ -19,7 +19,8 @@ A raíz de esto, es que tuvimos que extender las herramientas a nuestras necesid
 
 ## Captures
 
-https://github.com/pdepmartestm/2023-tpgame-dulce-de-leche-tentacion/assets/76252340/c6f7f005-f2e9-4aa4-8e18-142adbcc4bfe
+https://github.com/pdepmartestm/2023-tpgame-dulce-de-leche-tentacion/assets/33577925/02a3e7ae-27e3-4635-a2d0-bdf0ae3a27ac
+
 
 ## Others
 
